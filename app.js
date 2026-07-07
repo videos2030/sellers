@@ -13,6 +13,7 @@ export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 export const DICT = {
   'nav.gear':        { ar: 'المعدات', en: 'Gear' },
   'nav.talent':       { ar: 'الموديلات', en: 'Talent' },
+  'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencers' },
   'nav.langBtn':      { ar: 'English', en: 'العربية' },
 
   // ---- Home ----
@@ -30,6 +31,10 @@ export const DICT = {
   'home.laneTalH':    { ar: 'احجز موديل', en: 'Book Talent' },
   'home.laneTalP':    { ar: 'تصفّح الموديلات المسجّلين لتمثيل حملات ومنتجات، وقدّم مزايدتك مع ميزانيتك وتفاصيل التصوير.', en: 'Look through talent registered to represent products and campaigns, then submit a bid with your budget and shoot details.' },
   'home.laneTalGo':   { ar: 'تصفّح الموديلات ←', en: 'Browse talent →' },
+  'home.laneCamTab':  { ar: 'مشاهير ومؤثرون', en: 'Influencers' },
+  'home.laneCamH':    { ar: 'حملات المشاهير', en: 'Influencer Campaigns' },
+  'home.laneCamP':    { ar: 'تصفّح المشاهير وسعر كل ١٠٠٠ مشاهدة، وارفع فيديو شورت للحملة برابط من يوتيوب أو انستقرام أو تيك توك أو إكس أو فيسبوك.', en: 'Browse influencers and their rate per 1,000 views, then submit your own short video link for the campaign — YouTube, Instagram, TikTok, X or Facebook.' },
+  'home.laneCamGo':   { ar: 'تصفّح الحملات ←', en: 'Browse campaigns →' },
   'home.howEyebrow':  { ar: 'كيف تعمل المنصة', en: 'How it works' },
   'home.howTitle':    { ar: 'بسيطة للطرفين', en: 'Simple on both sides' },
   'home.step1':       { ar: 'الخطوة ١', en: 'Step 1' },
@@ -132,6 +137,45 @@ export const DICT = {
   'talent.bidOk':      { ar: 'تم إرسال مزايدتك، وسيتم التواصل معك بخصوص الخطوات التالية.', en: 'Bid submitted. You will be contacted about next steps.' },
   'talent.bidErr':     { ar: 'تعذّر إرسال مزايدتك. حاول مرة أخرى.', en: 'Could not submit your bid. Please try again.' },
   'talent.recentBids': { ar: 'آخر المزايدات', en: 'Recent bids' },
+
+  // ---- Influencer campaigns page ----
+  'camp.eyebrow':      { ar: 'حملات المشاهير', en: 'Influencer campaigns' },
+  'camp.h1':           { ar: 'حملات المشاهير', en: 'CAMPAIGNS' },
+  'camp.tag':          { ar: 'تصفّح المشاهير وسعر كل ١٠٠٠ مشاهدة، شاهد نماذج من حملاتهم السابقة، وارفع رابط فيديو الشورت الخاص بك للمشاركة في الحملة.', en: 'Browse influencers and their rate per 1,000 views, see examples of their past campaigns, and submit your own short video link to join a campaign.' },
+  'camp.registered':   { ar: 'مشاهير مسجّلون', en: 'Registered influencers' },
+  'camp.browseProf':   { ar: 'تصفّح الحملات', en: 'Browse campaigns' },
+  'camp.registerBtn':  { ar: 'سجّل كمشهور', en: 'Register as an influencer' },
+  'camp.loading':      { ar: 'جاري تحميل الحملات…', en: 'Loading campaigns…' },
+  'camp.empty':        { ar: 'لا يوجد مشاهير مسجّلون بعد. كن أول من ينضم أدناه.', en: 'No influencers registered yet. Be the first to join below.' },
+  'camp.error':        { ar: 'تعذّر تحميل الحملات الآن.', en: 'Could not load campaigns right now.' },
+  'camp.per1000':      { ar: 'لكل ١٠٠٠ مشاهدة', en: 'per 1,000 views' },
+  'camp.rateOnReq':    { ar: 'السعر عند الطلب', en: 'Rate on request' },
+  'camp.pastCampaigns':{ ar: 'حملات سابقة', en: 'Past campaigns' },
+  'camp.submitBtn':    { ar: 'شارك بفيديو', en: 'Submit a video' },
+  'camp.submissions':  { ar: 'فيديوهات مُرسلة', en: 'Submitted videos' },
+  'camp.noSubs':       { ar: 'لا توجد فيديوهات بعد — كن أول من يشارك', en: 'No videos yet — be the first' },
+  'camp.wantJoin':     { ar: 'تبي تسوّق لحملة؟', en: 'Want to run a campaign?' },
+  'camp.regTitle':     { ar: 'سجّل كمشهور', en: 'Register as an influencer' },
+  'camp.regP':         { ar: 'اسمك وصورتك ووصفك وسعرك يظهرون للعملاء. بريدك ورقمك يبقيان خاصين ويُستخدمان فقط للتواصل بخصوص الدفع.', en: 'Your name, photo, description and rate appear publicly. Your email and phone stay private and are only used to reach you about payment.' },
+  'camp.formSub':      { ar: 'فورم التسجيل', en: 'Registration form' },
+  'lbl.description2':  { ar: 'وصف عنك', en: 'Description' },
+  'ph.campBio':        { ar: 'مين انت، جمهورك، نوع المحتوى…', en: 'Who you are, your audience, content style…' },
+  'lbl.rate1000':      { ar: 'السعر لكل ١٠٠٠ مشاهدة (USD)', en: 'Rate per 1,000 views (USD)' },
+  'camp.linksNote':    { ar: 'روابط اختيارية لنماذج من حملاتك السابقة (اترك أي حقل فارغ إذا لا ينطبق)', en: 'Optional links to examples of your past campaigns (leave any field blank if not applicable)' },
+  'camp.regSubmitBtn': { ar: 'أضف ملفي', en: 'Submit profile' },
+  'camp.regOk':        { ar: 'تم إضافة ملفك، ويظهر الآن أعلاه.', en: 'Profile submitted. It now appears above.' },
+  'camp.regErr':       { ar: 'حدث خطأ أثناء إضافة ملفك. حاول مرة أخرى.', en: 'Something went wrong submitting your profile. Please try again.' },
+  'modal.campLbl':     { ar: 'الحملة', en: 'Campaign' },
+  'modal.subTitle':    { ar: 'شارك بفيديو', en: 'Submit a video' },
+  'lbl.platform':      { ar: 'المنصة', en: 'Platform' },
+  'ph.selectPlatform': { ar: 'اختر منصة', en: 'Select a platform' },
+  'lbl.videoUrl':      { ar: 'رابط فيديو الشورت', en: 'Short video link' },
+  'ph.videoUrl':       { ar: 'الصق رابط الفيديو حسب المنصة المختارة', en: 'Paste the video link matching the platform you picked' },
+  'lbl.emailOptPriv':  { ar: 'البريد الإلكتروني (خاص، للتواصل بخصوص الدفع)', en: 'Email (private, for payment follow-up)' },
+  'modal.subNotice':   { ar: 'عند الإرسال، يظهر اسمك ورابط الفيديو للعامة فوراً. بياناتك الخاصة تُستخدم فقط للتواصل معك بخصوص الدفع حسب عدد المشاهدات.', en: 'On submit, your name and video link appear publicly right away. Your private details are only used to contact you about payment based on view count.' },
+  'camp.sendSub':      { ar: 'أرسل', en: 'Send' },
+  'camp.subOk':        { ar: 'تم إرسال فيديوك، ويظهر الآن ضمن قائمة العام.', en: 'Video submitted. It now appears in the public list.' },
+  'camp.subErr':       { ar: 'تعذّر إرسال الفيديو. حاول مرة أخرى.', en: 'Could not submit your video. Please try again.' },
 };
 
 const CATEGORY_LABELS = {
@@ -164,6 +208,29 @@ const CATEGORY_LABELS = {
 
 export const GEAR_CATEGORIES = ['Cameras','Lenses','Lighting','Audio','Grip & Rigging','Drones','Monitors & Video','Computers & Storage','Studio & Decor','Cables & Connectors','Adapters','Mounting & Rigging Tools','Cleaning & Maintenance','Storage & Transport','On-Location & Shade','Forgotten Essentials','Other'];
 export const TALENT_CATEGORIES = ['Product / Commercial','Fashion','Fitness','Podcast Host','Voiceover','Presenter','Other'];
+
+// Social platforms for influencer campaign links & submissions.
+// Keys are the canonical values stored in the DB; label/color/icon are display-only.
+export const PLATFORMS = {
+  youtube:   { label: 'YouTube',   color: '#FF0000', field: 'youtube_url' },
+  instagram: { label: 'Instagram', color: '#C13584', field: 'instagram_url' },
+  tiktok:    { label: 'TikTok',    color: '#010101', field: 'tiktok_url' },
+  x:         { label: 'X',         color: '#000000', field: 'x_url' },
+  facebook:  { label: 'Facebook',  color: '#1877F2', field: 'facebook_url' },
+};
+
+// Small monochrome glyph per platform (functional icon, not a brand logo asset).
+export function platformIcon(key, size = 14) {
+  const c = PLATFORMS[key] ? PLATFORMS[key].color : '#666';
+  const paths = {
+    youtube:   `<rect x="1" y="4" width="18" height="12" rx="4" fill="${c}"/><polygon points="8,7 8,13 14,10" fill="#fff"/>`,
+    instagram: `<rect x="2" y="2" width="16" height="16" rx="5" fill="none" stroke="${c}" stroke-width="2"/><circle cx="10" cy="10" r="4" fill="none" stroke="${c}" stroke-width="2"/><circle cx="14.5" cy="5.5" r="1.2" fill="${c}"/>`,
+    tiktok:    `<path d="M11 2 v10.2 a3 3 0 1 1 -2.2 -2.9 V7.1 A5.1 5.1 0 1 0 13 12 V6.2 a4.4 4.4 0 0 0 3 1.2 V5.2 A3 3 0 0 1 13 2 Z" fill="${c}"/>`,
+    x:         `<line x1="3" y1="3" x2="17" y2="17" stroke="${c}" stroke-width="2.4"/><line x1="17" y1="3" x2="3" y2="17" stroke="${c}" stroke-width="2.4"/>`,
+    facebook:  `<circle cx="10" cy="10" r="9" fill="${c}"/><path d="M11.5 10.2h1.7l.3-2.1h-2V6.8c0-.6.2-1 1-1h1.1V3.9c-.2 0-.9-.1-1.7-.1-1.7 0-2.8 1-2.8 2.9v1.3H7.4v2.1h1.7V16h2.4v-5.8Z" fill="#fff"/>`,
+  };
+  return `<svg width="${size}" height="${size}" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">${paths[key] || ''}</svg>`;
+}
 
 let currentLang = localStorage.getItem('onset_lang') || 'ar';
 
@@ -272,4 +339,23 @@ export async function loadPublicBids() {
     byTalent.get(row.talent_id).push(row);
   });
   return byTalent;
+}
+
+/**
+ * Reads the public, contact-info-free video submission list for all
+ * influencer campaigns from the `campaign_submissions_public` view.
+ * Returns Map<influencer_id, Array<{submitter_name, platform, video_url, created_at}>>
+ */
+export async function loadPublicSubmissions() {
+  const { data, error } = await sb
+    .from('campaign_submissions_public')
+    .select('influencer_id,submitter_name,platform,video_url,created_at')
+    .order('created_at', { ascending: false });
+  const byInfluencer = new Map();
+  if (error) { console.error(error); return byInfluencer; }
+  (data || []).forEach(row => {
+    if (!byInfluencer.has(row.influencer_id)) byInfluencer.set(row.influencer_id, []);
+    byInfluencer.get(row.influencer_id).push(row);
+  });
+  return byInfluencer;
 }

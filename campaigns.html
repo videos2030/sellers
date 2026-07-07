@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onset — حملات المشاهير</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">ON<span>SET</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="rental.html" data-i18n="nav.gear">المعدات</a></li>
+        <li><a href="talent.html" data-i18n="nav.talent">الموديلات</a></li>
+        <li><a href="campaigns.html" class="active" data-i18n="nav.campaigns">حملات المشاهير</a></li>
+      </ul>
+      <button class="lang-toggle" id="langToggle">English</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" style="padding:52px 0 36px;">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow" style="color:#9BA0AA;" data-i18n="camp.eyebrow">حملات المشاهير</p>
+      <h1 style="font-size:clamp(34px,5.4vw,58px);" data-i18n="camp.h1">حملات المشاهير</h1>
+      <p class="tag" data-i18n="camp.tag">تصفّح المشاهير وسعر كل ١٠٠٠ مشاهدة، شاهد نماذج من حملاتهم السابقة، وارفع رابط فيديو الشورت الخاص بك للمشاركة في الحملة.</p>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Phone screen with a short video and social platform icons orbiting it">
+        <defs>
+          <radialGradient id="glowMix" cx="0.5" cy="0.4" r="0.65">
+            <stop offset="0" stop-color="#FFB74A" stop-opacity="0.3"/>
+            <stop offset="1" stop-color="#6C93EE" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="150" r="150" fill="url(#glowMix)"/>
+        <!-- phone -->
+        <g transform="translate(160,50)">
+          <rect x="0" y="0" width="100" height="200" rx="16" fill="#1C1F26" stroke="#33373E" stroke-width="3"/>
+          <rect x="8" y="14" width="84" height="172" rx="6" fill="#0D0E10"/>
+          <polygon points="42,80 42,120 68,100" fill="#FFB74A"/>
+          <rect x="20" y="150" width="60" height="6" rx="3" fill="#33373E"/>
+          <rect x="20" y="162" width="40" height="6" rx="3" fill="#33373E"/>
+        </g>
+        <!-- orbiting platform dots -->
+        <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#F3F0E9">
+          <circle cx="80" cy="90" r="20" fill="#FF0000"/>
+          <circle cx="340" cy="80" r="20" fill="#C13584"/>
+          <circle cx="70" cy="230" r="20" fill="#111"/>
+          <circle cx="350" cy="230" r="20" fill="#1877F2"/>
+          <circle cx="210" cy="290" r="18" fill="#000"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<section class="pad">
+  <div class="wrap">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+      <div>
+        <p class="eyebrow" data-i18n="camp.registered">مشاهير مسجّلون</p>
+        <h2 class="section-title" data-i18n="camp.browseProf">تصفّح الحملات</h2>
+      </div>
+      <a href="#join-campaign" class="btn amber" data-i18n="camp.registerBtn">سجّل كمشهور</a>
+    </div>
+
+    <div class="grid" id="campaignGrid" style="margin-top:32px;">
+      <div class="empty" data-i18n="camp.loading">جاري تحميل الحملات…</div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER AS INFLUENCER -->
+<section class="pad" id="join-campaign">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--ink-soft)" data-i18n="camp.wantJoin">تبي تسوّق لحملة؟</p>
+    <h2 class="section-title" data-i18n="camp.regTitle">سجّل كمشهور</h2>
+    <p style="max-width:56ch; color:var(--ink-soft)" data-i18n="camp.regP">اسمك وصورتك ووصفك وسعرك يظهرون للعملاء. بريدك ورقمك يبقيان خاصين ويُستخدمان فقط للتواصل بخصوص الدفع.</p>
+
+    <div class="panel" style="margin-top:24px;">
+      <p class="sub" style="font-family:var(--mono); font-size:12px; color:#9BA0AA;" data-i18n="camp.formSub">فورم التسجيل</p>
+      <form id="influencerForm">
+        <div class="form-grid">
+          <div>
+            <label for="iName" data-i18n="lbl.yourName">اسمك الكامل</label>
+            <input id="iName" required data-i18n-placeholder="ph.fullName" placeholder="الاسم الكامل">
+          </div>
+          <div>
+            <label for="iRate" data-i18n="lbl.rate1000">السعر لكل ١٠٠٠ مشاهدة (USD)</label>
+            <input id="iRate" type="number" min="0" step="0.01" placeholder="15">
+          </div>
+          <div>
+            <label for="iEmail" data-i18n="lbl.emailPrivate">البريد الإلكتروني (خاص)</label>
+            <input id="iEmail" type="email" required>
+          </div>
+          <div>
+            <label for="iPhone" data-i18n="lbl.mobilePrivate">رقم الجوال، مع رمز الدولة (خاص)</label>
+            <input id="iPhone" required placeholder="+973 3xxx xxxx">
+          </div>
+          <div class="full">
+            <label for="iBio" data-i18n="lbl.description2">وصف عنك</label>
+            <textarea id="iBio" data-i18n-placeholder="ph.campBio" placeholder="مين انت، جمهورك، نوع المحتوى…"></textarea>
+          </div>
+          <div>
+            <label for="iImage" data-i18n="lbl.photo">صورة</label>
+            <input id="iImage" type="file" accept="image/*">
+          </div>
+        </div>
+
+        <p class="field-note" style="margin-top:22px;" data-i18n="camp.linksNote">روابط اختيارية لنماذج من حملاتك السابقة (اترك أي حقل فارغ إذا لا ينطبق)</p>
+        <div class="form-grid">
+          <div><label for="iYoutube">YouTube</label><input id="iYoutube" type="url" placeholder="https://youtube.com/…"></div>
+          <div><label for="iInstagram">Instagram</label><input id="iInstagram" type="url" placeholder="https://instagram.com/…"></div>
+          <div><label for="iTiktok">TikTok</label><input id="iTiktok" type="url" placeholder="https://tiktok.com/…"></div>
+          <div><label for="iX">X</label><input id="iX" type="url" placeholder="https://x.com/…"></div>
+          <div><label for="iFacebook">Facebook</label><input id="iFacebook" type="url" placeholder="https://facebook.com/…"></div>
+        </div>
+
+        <button class="btn full amber" style="margin-top:22px;" type="submit" data-i18n="camp.regSubmitBtn">أضف ملفي</button>
+        <p class="status-msg" id="influencerStatus"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span data-i18n="footer.tag">ONSET — سوق تأجير معدات الإنتاج وحجز الموديلات</span>
+    <span data-i18n="footer.built">مبني على Supabase · منشور على Vercel</span>
+  </div>
+</footer>
+
+<!-- SUBMIT VIDEO MODAL -->
+<div class="modal-bg" id="subModalBg">
+  <div class="modal">
+    <button class="modal-close" id="subModalClose">&times;</button>
+    <p class="sub" id="subModalName" data-i18n="modal.campLbl">الحملة</p>
+    <h3 data-i18n="modal.subTitle">شارك بفيديو</h3>
+    <form id="subForm">
+      <input type="hidden" id="subInfluencerId">
+      <div class="form-grid">
+        <div class="full">
+          <label for="subName" data-i18n="lbl.yourName">اسمك الكامل</label>
+          <input id="subName" required>
+        </div>
+        <div>
+          <label for="subPlatform" data-i18n="lbl.platform">المنصة</label>
+          <select id="subPlatform" required>
+            <option value="" data-i18n="ph.selectPlatform">اختر منصة</option>
+            <option value="youtube">YouTube</option>
+            <option value="instagram">Instagram</option>
+            <option value="tiktok">TikTok</option>
+            <option value="x">X</option>
+            <option value="facebook">Facebook</option>
+          </select>
+        </div>
+        <div>
+          <label for="subEmail" data-i18n="lbl.emailOptPriv">البريد الإلكتروني (خاص، للتواصل بخصوص الدفع)</label>
+          <input id="subEmail" type="email">
+        </div>
+        <div class="full">
+          <label for="subVideoUrl" data-i18n="lbl.videoUrl">رابط فيديو الشورت</label>
+          <input id="subVideoUrl" type="url" required data-i18n-placeholder="ph.videoUrl" placeholder="الصق رابط الفيديو حسب المنصة المختارة">
+        </div>
+      </div>
+      <div class="notice" data-i18n="modal.subNotice">عند الإرسال، يظهر اسمك ورابط الفيديو للعامة فوراً. بياناتك الخاصة تُستخدم فقط للتواصل معك بخصوص الدفع حسب عدد المشاهدات.</div>
+      <button class="btn full amber" style="margin-top:18px;" type="submit" data-i18n="camp.sendSub">أرسل</button>
+      <p class="status-msg" id="subStatus"></p>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { sb, escapeHtml, setStatus, uploadImage, formatMoney, initI18n, onLangChange, t, PLATFORMS, platformIcon, loadPublicSubmissions } from './app.js';
+
+let allInfluencers = [];
+let subsByInfluencer = new Map();
+
+function pastCampaignLinks(inf) {
+  const items = Object.keys(PLATFORMS)
+    .map(key => ({ key, url: inf[PLATFORMS[key].field] }))
+    .filter(x => x.url);
+  if (!items.length) return '';
+  return `
+    <div class="meta" style="display:flex; gap:8px; align-items:center; margin:2px 0 12px;">
+      <span style="color:var(--ink-soft)">${t('camp.pastCampaigns')}:</span>
+      ${items.map(x => `<a href="${escapeHtml(x.url)}" target="_blank" rel="noopener" title="${escapeHtml(PLATFORMS[x.key].label)}">${platformIcon(x.key, 18)}</a>`).join('')}
+    </div>`;
+}
+
+function submissionsHtml(id) {
+  const subs = subsByInfluencer.get(id) || [];
+  if (!subs.length) {
+    return `<div class="bid-box empty">${t('camp.noSubs')}</div>`;
+  }
+  const recent = subs.slice(0, 4);
+  return `
+    <div class="bid-box">
+      <div class="top-bid"><span>${t('camp.submissions')}</span><b>${subs.length}</b></div>
+      <ul class="recent-bids">
+        ${recent.map(s => `<li>${platformIcon(s.platform, 13)} <span style="flex:1; margin:0 6px;">${escapeHtml(s.submitter_name)}</span><a href="${escapeHtml(s.video_url)}" target="_blank" rel="noopener" style="color:var(--blue-ink); font-weight:600;">↗</a></li>`).join('')}
+      </ul>
+    </div>`;
+}
+
+function renderCampaigns() {
+  const grid = document.getElementById('campaignGrid');
+  if (!allInfluencers.length) {
+    grid.innerHTML = `<div class="empty">${t('camp.empty')}</div>`;
+    return;
+  }
+  grid.innerHTML = allInfluencers.map(inf => `
+    <div class="card">
+      <img class="thumb" src="${inf.image_url ? escapeHtml(inf.image_url) : 'https://placehold.co/480x360/eee2d8/33373e?text=No+Photo'}" alt="${escapeHtml(inf.name)}">
+      <div class="body">
+        <p class="badge">${inf.rate_per_1000_views ? formatMoney(inf.rate_per_1000_views) + ' ' + t('camp.per1000') : t('camp.rateOnReq')}</p>
+        <h4>${escapeHtml(inf.name)}</h4>
+        <p style="font-size:13px; color:var(--ink-soft); margin:0 0 10px;">${escapeHtml((inf.bio || '').slice(0,110))}${(inf.bio||'').length>110?'…':''}</p>
+        ${pastCampaignLinks(inf)}
+        ${submissionsHtml(inf.id)}
+        <button class="btn full outline" data-id="${inf.id}" data-name="${escapeHtml(inf.name)}">${t('camp.submitBtn')}</button>
+      </div>
+    </div>
+  `).join('');
+  grid.querySelectorAll('button[data-id]').forEach(btn => {
+    btn.addEventListener('click', () => openSubModal(btn.dataset.id, btn.dataset.name));
+  });
+}
+
+async function loadCampaigns() {
+  const { data, error } = await sb.from('influencers')
+    .select('id,name,bio,rate_per_1000_views,image_url,youtube_url,instagram_url,tiktok_url,x_url,facebook_url,created_at')
+    .order('created_at', { ascending: false });
+  const grid = document.getElementById('campaignGrid');
+  if (error) {
+    grid.innerHTML = `<div class="empty">${t('camp.error')}</div>`;
+    console.error(error);
+    return;
+  }
+  allInfluencers = data || [];
+  subsByInfluencer = await loadPublicSubmissions();
+  renderCampaigns();
+}
+loadCampaigns();
+
+// ---- Register as influencer ----
+const influencerForm = document.getElementById('influencerForm');
+influencerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const statusEl = document.getElementById('influencerStatus');
+  const submitBtn = influencerForm.querySelector('button[type=submit]');
+  submitBtn.disabled = true;
+  setStatus(statusEl, t('status.uploading'));
+  try {
+    const file = document.getElementById('iImage').files[0];
+    const image_url = file ? await uploadImage('influencer-images', file) : null;
+    const { error } = await sb.from('influencers').insert({
+      name: document.getElementById('iName').value.trim(),
+      contact_email: document.getElementById('iEmail').value.trim(),
+      contact_phone: document.getElementById('iPhone').value.trim(),
+      bio: document.getElementById('iBio').value.trim(),
+      rate_per_1000_views: document.getElementById('iRate').value || null,
+      image_url,
+      youtube_url: document.getElementById('iYoutube').value.trim() || null,
+      instagram_url: document.getElementById('iInstagram').value.trim() || null,
+      tiktok_url: document.getElementById('iTiktok').value.trim() || null,
+      x_url: document.getElementById('iX').value.trim() || null,
+      facebook_url: document.getElementById('iFacebook').value.trim() || null,
+    });
+    if (error) throw error;
+    setStatus(statusEl, t('camp.regOk'), 'ok');
+    influencerForm.reset();
+    loadCampaigns();
+  } catch (err) {
+    console.error(err);
+    setStatus(statusEl, t('camp.regErr'), 'err');
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+// ---- Submit video modal ----
+const modalBg = document.getElementById('subModalBg');
+function openSubModal(id, name) {
+  document.getElementById('subInfluencerId').value = id;
+  document.getElementById('subModalName').textContent = name;
+  modalBg.classList.add('open');
+}
+document.getElementById('subModalClose').addEventListener('click', () => modalBg.classList.remove('open'));
+modalBg.addEventListener('click', (e) => { if (e.target === modalBg) modalBg.classList.remove('open'); });
+
+const subForm = document.getElementById('subForm');
+subForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const statusEl = document.getElementById('subStatus');
+  const submitBtn = subForm.querySelector('button[type=submit]');
+  submitBtn.disabled = true;
+  setStatus(statusEl, t('status.sending'));
+  try {
+    const { error } = await sb.from('campaign_submissions').insert({
+      influencer_id: document.getElementById('subInfluencerId').value,
+      submitter_name: document.getElementById('subName').value.trim(),
+      submitter_email: document.getElementById('subEmail').value.trim() || null,
+      platform: document.getElementById('subPlatform').value,
+      video_url: document.getElementById('subVideoUrl').value.trim(),
+    });
+    if (error) throw error;
+    setStatus(statusEl, t('camp.subOk'), 'ok');
+    subForm.reset();
+    subsByInfluencer = await loadPublicSubmissions();
+    renderCampaigns();
+    setTimeout(() => { modalBg.classList.remove('open'); setStatus(statusEl, ''); }, 1800);
+  } catch (err) {
+    console.error(err);
+    setStatus(statusEl, t('camp.subErr'), 'err');
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+initI18n();
+onLangChange(() => { renderCampaigns(); });
+</script>
+
+</body>
+</html>

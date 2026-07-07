@@ -1,19 +1,27 @@
-# Onset — gear rental & talent booking (Arabic-first, bilingual)
+# Onset — gear rental, talent booking & influencer campaigns (Arabic-first, bilingual)
 
-A no-login marketplace: people list production equipment for rent (or you seed
-your own rental catalog), and separately register as bookable talent; clients
-submit rental requests / bids with their own contact details. Static site
-(HTML/CSS/JS) + Supabase backend. Arabic is the default language, with a one-
-click toggle to English on every page.
+A no-login marketplace with three lanes:
+- **Gear** — people list production equipment for rent (or you seed your own rental catalog).
+- **Talent** — models/actors register; clients submit bids with a public name+amount leaderboard.
+- **Campaigns** — influencers register with a rate per 1,000 views and links to past
+  campaign videos (YouTube/Instagram/TikTok/X/Facebook); anyone can submit their own
+  short-video link to join a campaign, and their name + video link show up publicly.
+
+Everyone submits their own contact details directly; nothing needs a login. Static
+site (HTML/CSS/JS) + Supabase backend. Arabic is the default language, with a
+one-click toggle to English on every page.
 
 ## 1. Set up Supabase
 
 1. Open your project → **SQL Editor** → paste the contents of `supabase-schema.sql` → **Run**.
-   This creates the 4 tables, turns on Row Level Security with public-but-safe
-   policies, creates two public storage buckets (`equipment-images`,
-   `talent-images`) for photos, and creates a `talent_bids_public` view that
-   safely exposes just the bidder's name + amount (never their email/phone)
-   so bids show up publicly on the talent page like a live auction.
+   This creates the 6 tables (equipment, rental_requests, talent_profiles,
+   talent_bids, influencers, campaign_submissions), turns on Row Level Security
+   with public-but-safe policies, creates three public storage buckets
+   (`equipment-images`, `talent-images`, `influencer-images`) for photos, and
+   creates two safe public views — `talent_bids_public` and
+   `campaign_submissions_public` — that expose only the bidder/submitter's
+   name (+ amount, or + platform/video link) and never their email/phone, so
+   bids and campaign video submissions show up publicly like a live feed.
    Safe to re-run if you already ran an older version of this file.
 2. (Optional but recommended) Open `seed-equipment-catalog.sql`, edit the
    three lines at the top (`owner_name`, `owner_email`, `owner_phone` — your
@@ -40,13 +48,21 @@ yourself instead of having them register through the public form:
 It appears on the talent page immediately, exactly like a self-registered
 profile — clients can bid on it right away.
 
+The same trick works for influencers: upload their photo to the
+`influencer-images` bucket, then **Insert row** in the `influencers` table
+with `name`, `bio`, `rate_per_1000_views`, `contact_email`, `contact_phone`,
+`image_url`, and any of `youtube_url` / `instagram_url` / `tiktok_url` /
+`x_url` / `facebook_url` you have examples for.
+
 **Privacy note on what's public vs private:**
-- `equipment` and `talent_profiles` are publicly readable (that's the point — people browse them).
-- `rental_requests` and `talent_bids` are **insert-only** for visitors — nobody can read other
-  people's contact info or full bid rows through the site.
-- `talent_bids_public` is a **read-only view** exposing only `client_name` +
-  `bid_amount` + `created_at` — this is what powers the public "top bid" /
-  "recent bids" list on each talent card, without leaking email or phone.
+- `equipment`, `talent_profiles` and `influencers` are publicly readable (that's the point — people browse them).
+- `rental_requests`, `talent_bids` and `campaign_submissions` are **insert-only** for visitors —
+  nobody can read other people's contact info or full rows through the site.
+- `talent_bids_public` exposes only `client_name` + `bid_amount` + `created_at`
+  (powers the "top bid" / "recent bids" list on each talent card).
+- `campaign_submissions_public` exposes only `submitter_name` + `platform` +
+  `video_url` + `created_at` (powers the public submitted-videos list on each
+  campaign card) — the submitter's optional email stays private in the base table.
 
 ## 2. Deploy to Vercel
 
@@ -57,9 +73,10 @@ profile — clients can bid on it right away.
 
 ## Files
 
-- `index.html` — homepage, links to both marketplaces
+- `index.html` — homepage, links to all three lanes
 - `rental.html` — gear listings, "list your gear" form, rental request modal
 - `talent.html` — talent profiles with public bid leaderboard, registration form, bid modal
+- `campaigns.html` — influencer campaigns with public submitted-video feed, registration form, submit-video modal
 - `app.js` — Supabase client, Arabic/English dictionary + language switcher, shared helpers
 - `styles.css` — shared design system (adds RTL/Arabic typography rules)
 - `supabase-schema.sql` — run once in Supabase (safe to re-run)
