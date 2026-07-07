@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rent Gear — Onset</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">ON<span>SET</span></a>
+    <ul class="nav-links">
+      <li><a href="rental.html" class="active">Gear</a></li>
+      <li><a href="talent.html">Talent</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" style="padding:56px 0 40px;">
+  <div class="wrap">
+    <p class="eyebrow" style="color:#9BA0AA;">Equipment marketplace</p>
+    <h1 style="font-size:clamp(40px,7vw,72px);">GEAR</h1>
+    <p class="tag">Cameras, lenses, lighting, audio and grip — available direct from other production owners.</p>
+  </div>
+</header>
+
+<section class="pad">
+  <div class="wrap">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+      <div>
+        <p class="eyebrow">Available now</p>
+        <h2 class="section-title">Browse listings</h2>
+      </div>
+      <a href="#list-gear" class="btn amber">List your gear</a>
+    </div>
+
+    <div class="chips" id="categoryChips">
+      <button class="chip active" data-cat="all">All</button>
+    </div>
+
+    <div class="grid" id="equipmentGrid" style="margin-top:24px;">
+      <div class="empty">Loading listings…</div>
+    </div>
+  </div>
+</section>
+
+<!-- LIST YOUR GEAR -->
+<section class="pad" id="list-gear">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--ink-soft)">Own equipment?</p>
+    <h2 class="section-title">List your gear</h2>
+    <p style="max-width:56ch; color:var(--ink-soft)">Add a listing so renters can find it and reach out. Your contact details go to the renter when they submit a request — nothing is shared beyond this site.</p>
+
+    <div class="panel" style="margin-top:24px;">
+      <p class="sub" style="font-family:var(--mono); font-size:12px; color:#9BA0AA;">Listing form</p>
+      <form id="equipmentForm">
+        <div class="form-grid">
+          <div>
+            <label for="ownerName">Your name</label>
+            <input id="ownerName" required placeholder="Full name">
+          </div>
+          <div>
+            <label for="ownerEmail">Email</label>
+            <input id="ownerEmail" type="email" required placeholder="you@example.com">
+          </div>
+          <div>
+            <label for="ownerPhone">Mobile number (with country code)</label>
+            <input id="ownerPhone" required placeholder="+973 3xxx xxxx">
+          </div>
+          <div>
+            <label for="category">Category</label>
+            <select id="category" required>
+              <option value="">Select a category</option>
+              <option>Cameras</option>
+              <option>Lenses</option>
+              <option>Lighting</option>
+              <option>Audio</option>
+              <option>Grip &amp; Rigging</option>
+              <option>Drones</option>
+              <option>Monitors &amp; Video</option>
+              <option>Computers &amp; Storage</option>
+              <option>Studio &amp; Decor</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="full">
+            <label for="title">Item title</label>
+            <input id="title" required placeholder="e.g. Sony FX3 Cinema Camera">
+          </div>
+          <div class="full">
+            <label for="description">Description</label>
+            <textarea id="description" placeholder="Condition, included accessories, pickup location…"></textarea>
+          </div>
+          <div>
+            <label for="price">Price per day (USD)</label>
+            <input id="price" type="number" min="0" step="0.01" placeholder="80">
+          </div>
+          <div>
+            <label for="image">Photo</label>
+            <input id="image" type="file" accept="image/*">
+          </div>
+        </div>
+        <button class="btn full amber" style="margin-top:22px;" type="submit">Submit listing</button>
+        <p class="status-msg" id="equipmentStatus"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>ONSET — production gear &amp; talent marketplace</span>
+    <span>Built on Supabase · Deployed on Vercel</span>
+  </div>
+</footer>
+
+<!-- REQUEST MODAL -->
+<div class="modal-bg" id="requestModalBg">
+  <div class="modal">
+    <button class="modal-close" id="requestModalClose">&times;</button>
+    <p class="sub" id="requestModalItem">Item</p>
+    <h3>Request to rent</h3>
+    <form id="requestForm">
+      <input type="hidden" id="requestEquipmentId">
+      <div class="form-grid">
+        <div class="full">
+          <label for="renterName">Your name</label>
+          <input id="renterName" required>
+        </div>
+        <div>
+          <label for="renterEmail">Email</label>
+          <input id="renterEmail" type="email" required>
+        </div>
+        <div>
+          <label for="renterPhone">Mobile (with country code)</label>
+          <input id="renterPhone" required placeholder="+973 3xxx xxxx">
+        </div>
+        <div>
+          <label for="startDate">Start date</label>
+          <input id="startDate" type="date">
+        </div>
+        <div>
+          <label for="endDate">End date</label>
+          <input id="endDate" type="date">
+        </div>
+        <div class="full">
+          <label for="reqMessage">Message (optional)</label>
+          <textarea id="reqMessage" placeholder="Anything the owner should know"></textarea>
+        </div>
+      </div>
+      <div class="notice">The owner will contact you directly by email or phone to confirm availability, final price, and pickup details.</div>
+      <button class="btn full amber" style="margin-top:18px;" type="submit">Send request</button>
+      <p class="status-msg" id="requestStatus"></p>
+    </form>
+  </div>
+</div>
+
+<script type="module">
+import { sb, escapeHtml, setStatus, uploadImage, formatMoney } from './app.js';
+
+const CATEGORIES = ['Cameras','Lenses','Lighting','Audio','Grip & Rigging','Drones','Monitors & Video','Computers & Storage','Studio & Decor','Other'];
+const chipsEl = document.getElementById('categoryChips');
+CATEGORIES.forEach(cat => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.dataset.cat = cat; b.textContent = cat;
+  chipsEl.appendChild(b);
+});
+
+let allEquipment = [];
+let activeCat = 'all';
+
+function renderGrid() {
+  const grid = document.getElementById('equipmentGrid');
+  const items = activeCat === 'all' ? allEquipment : allEquipment.filter(e => e.category === activeCat);
+  if (!items.length) {
+    grid.innerHTML = '<div class="empty">No listings in this category yet. Be the first — list your gear below.</div>';
+    return;
+  }
+  grid.innerHTML = items.map(e => `
+    <div class="card">
+      <img class="thumb" src="${e.image_url ? escapeHtml(e.image_url) : 'https://placehold.co/480x360/eee2d8/33373e?text=No+Photo'}" alt="${escapeHtml(e.title)}">
+      <div class="body">
+        <p class="badge">${escapeHtml(e.category)}</p>
+        <h4>${escapeHtml(e.title)}</h4>
+        <p class="meta">${e.price_per_day ? formatMoney(e.price_per_day) + ' / day' : 'Price on request'} · Listed by ${escapeHtml(e.owner_name)}</p>
+        <button class="btn full outline" data-id="${e.id}" data-title="${escapeHtml(e.title)}">Request to rent</button>
+      </div>
+    </div>
+  `).join('');
+  grid.querySelectorAll('button[data-id]').forEach(btn => {
+    btn.addEventListener('click', () => openRequestModal(btn.dataset.id, btn.dataset.title));
+  });
+}
+
+chipsEl.addEventListener('click', (e) => {
+  const btn = e.target.closest('.chip');
+  if (!btn) return;
+  chipsEl.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  activeCat = btn.dataset.cat;
+  renderGrid();
+});
+
+async function loadEquipment() {
+  const { data, error } = await sb.from('equipment').select('*').order('created_at', { ascending: false });
+  const grid = document.getElementById('equipmentGrid');
+  if (error) {
+    grid.innerHTML = '<div class="empty">Could not load listings right now.</div>';
+    console.error(error);
+    return;
+  }
+  allEquipment = data || [];
+  renderGrid();
+}
+loadEquipment();
+
+// ---- List your gear form ----
+const equipmentForm = document.getElementById('equipmentForm');
+equipmentForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const statusEl = document.getElementById('equipmentStatus');
+  const submitBtn = equipmentForm.querySelector('button[type=submit]');
+  submitBtn.disabled = true;
+  setStatus(statusEl, 'Uploading…');
+  try {
+    const file = document.getElementById('image').files[0];
+    const image_url = file ? await uploadImage('equipment-images', file) : null;
+    const { error } = await sb.from('equipment').insert({
+      owner_name: document.getElementById('ownerName').value.trim(),
+      owner_email: document.getElementById('ownerEmail').value.trim(),
+      owner_phone: document.getElementById('ownerPhone').value.trim(),
+      category: document.getElementById('category').value,
+      title: document.getElementById('title').value.trim(),
+      description: document.getElementById('description').value.trim(),
+      price_per_day: document.getElementById('price').value || null,
+      image_url,
+    });
+    if (error) throw error;
+    setStatus(statusEl, 'Listing submitted. It now appears above.', 'ok');
+    equipmentForm.reset();
+    loadEquipment();
+  } catch (err) {
+    console.error(err);
+    setStatus(statusEl, 'Something went wrong submitting your listing. Please try again.', 'err');
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+
+// ---- Request modal ----
+const modalBg = document.getElementById('requestModalBg');
+function openRequestModal(id, title) {
+  document.getElementById('requestEquipmentId').value = id;
+  document.getElementById('requestModalItem').textContent = title;
+  modalBg.classList.add('open');
+}
+document.getElementById('requestModalClose').addEventListener('click', () => modalBg.classList.remove('open'));
+modalBg.addEventListener('click', (e) => { if (e.target === modalBg) modalBg.classList.remove('open'); });
+
+const requestForm = document.getElementById('requestForm');
+requestForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const statusEl = document.getElementById('requestStatus');
+  const submitBtn = requestForm.querySelector('button[type=submit]');
+  submitBtn.disabled = true;
+  setStatus(statusEl, 'Sending…');
+  try {
+    const { error } = await sb.from('rental_requests').insert({
+      equipment_id: document.getElementById('requestEquipmentId').value,
+      renter_name: document.getElementById('renterName').value.trim(),
+      renter_email: document.getElementById('renterEmail').value.trim(),
+      renter_phone: document.getElementById('renterPhone').value.trim(),
+      start_date: document.getElementById('startDate').value || null,
+      end_date: document.getElementById('endDate').value || null,
+      message: document.getElementById('reqMessage').value.trim(),
+    });
+    if (error) throw error;
+    setStatus(statusEl, 'Request sent. The owner will contact you directly.', 'ok');
+    requestForm.reset();
+    setTimeout(() => { modalBg.classList.remove('open'); setStatus(statusEl, ''); }, 1800);
+  } catch (err) {
+    console.error(err);
+    setStatus(statusEl, 'Could not send your request. Please try again.', 'err');
+  } finally {
+    submitBtn.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>
