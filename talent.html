@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Book Talent — Onset</title>
+<title>Onset — احجز موديل</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,18 +14,52 @@
 <nav class="nav">
   <div class="wrap">
     <a href="index.html" class="brand">ON<span>SET</span></a>
-    <ul class="nav-links">
-      <li><a href="rental.html">Gear</a></li>
-      <li><a href="talent.html" class="active">Talent</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="rental.html" data-i18n="nav.gear">المعدات</a></li>
+        <li><a href="talent.html" class="active" data-i18n="nav.talent">الموديلات</a></li>
+      </ul>
+      <button class="lang-toggle" id="langToggle">English</button>
+    </div>
   </div>
 </nav>
 
-<header class="hero" style="padding:56px 0 40px;">
+<header class="hero" style="padding:52px 0 36px;">
   <div class="wrap">
-    <p class="eyebrow" style="color:#9BA0AA;">Talent marketplace</p>
-    <h1 style="font-size:clamp(40px,7vw,72px);">TALENT</h1>
-    <p class="tag">Browse people registered to represent products and campaigns, then submit a bid with your budget and shoot brief.</p>
+    <div class="hero-copy">
+      <p class="eyebrow" style="color:#9BA0AA;" data-i18n="talent.eyebrow">سوق الموديلات</p>
+      <h1 style="font-size:clamp(38px,6vw,64px);" data-i18n="talent.h1">الموديلات</h1>
+      <p class="tag" data-i18n="talent.tag">تصفّح موديلات مسجّلين لتمثيل منتجات وحملات، ثم قدّم مزايدتك مع ميزانيتك وتفاصيل التصوير.</p>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Spotlight framing a talent silhouette with an auction paddle">
+        <defs>
+          <radialGradient id="glowBlue" cx="0.5" cy="0.35" r="0.65">
+            <stop offset="0" stop-color="#6C93EE" stop-opacity="0.4"/>
+            <stop offset="1" stop-color="#6C93EE" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="130" r="150" fill="url(#glowBlue)"/>
+        <!-- viewfinder frame -->
+        <g stroke="#FFB74A" stroke-width="3" fill="none">
+          <path d="M60,60 h34 M60,60 v34"/>
+          <path d="M360,60 h-34 M360,60 v34"/>
+          <path d="M60,260 h34 M60,260 v-34"/>
+          <path d="M360,260 h-34 M360,260 v-34"/>
+        </g>
+        <!-- talent silhouette -->
+        <g transform="translate(210,175)" fill="#1C1F26">
+          <circle cx="0" cy="-60" r="28"/>
+          <path d="M-42,40 C-42,-6 42,-6 42,40 L46,72 L-46,72 Z"/>
+        </g>
+        <!-- auction paddle / bid tag -->
+        <g transform="translate(290,215) rotate(18)">
+          <rect x="-3" y="0" width="6" height="46" fill="#55595F"/>
+          <rect x="-30" y="-40" width="60" height="42" rx="6" fill="#6C93EE"/>
+          <text x="0" y="-14" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="18" fill="#0E1730" font-weight="700">$</text>
+        </g>
+      </svg>
+    </div>
   </div>
 </header>
 
@@ -32,14 +67,14 @@
   <div class="wrap">
     <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
       <div>
-        <p class="eyebrow">Registered talent</p>
-        <h2 class="section-title">Browse profiles</h2>
+        <p class="eyebrow" data-i18n="talent.registered">موديلات مسجّلون</p>
+        <h2 class="section-title" data-i18n="talent.browseProf">تصفّح الملفات</h2>
       </div>
-      <a href="#join-talent" class="btn blue">Register as talent</a>
+      <a href="#join-talent" class="btn blue" data-i18n="talent.registerBtn">سجّل كموديل</a>
     </div>
 
     <div class="grid" id="talentGrid" style="margin-top:32px;">
-      <div class="empty">Loading profiles…</div>
+      <div class="empty" data-i18n="talent.loading">جاري تحميل الملفات…</div>
     </div>
   </div>
 </section>
@@ -47,53 +82,46 @@
 <!-- REGISTER AS TALENT -->
 <section class="pad" id="join-talent">
   <div class="wrap">
-    <p class="eyebrow" style="color:var(--ink-soft)">Want to be booked?</p>
-    <h2 class="section-title">Register as talent</h2>
-    <p style="max-width:56ch; color:var(--ink-soft)">Your name, category and photo appear publicly so clients can find you. Your email and phone stay private and are only used by the site to notify you about bids.</p>
+    <p class="eyebrow" style="color:var(--ink-soft)" data-i18n="talent.wantBooked">تبي تنحجز؟</p>
+    <h2 class="section-title" data-i18n="talent.regTitle">سجّل كموديل</h2>
+    <p style="max-width:56ch; color:var(--ink-soft)" data-i18n="talent.regP">اسمك وتصنيفك وصورتك تظهر للعملاء ليجدوك. بريدك ورقمك يبقيان خاصين ويُستخدمان فقط لإشعارك بالمزايدات.</p>
 
     <div class="panel" style="margin-top:24px;">
-      <p class="sub" style="font-family:var(--mono); font-size:12px; color:#9BA0AA;">Registration form</p>
+      <p class="sub" style="font-family:var(--mono); font-size:12px; color:#9BA0AA;" data-i18n="talent.formSub">فورم التسجيل</p>
       <form id="talentForm">
         <div class="form-grid">
           <div>
-            <label for="tName">Your name</label>
-            <input id="tName" required placeholder="Full name">
+            <label for="tName" data-i18n="lbl.yourName">اسمك الكامل</label>
+            <input id="tName" required data-i18n-placeholder="ph.fullName" placeholder="الاسم الكامل">
           </div>
           <div>
-            <label for="tCategory">Category</label>
+            <label for="tCategory" data-i18n="lbl.category">التصنيف</label>
             <select id="tCategory" required>
-              <option value="">Select a category</option>
-              <option>Product / Commercial</option>
-              <option>Fashion</option>
-              <option>Fitness</option>
-              <option>Podcast Host</option>
-              <option>Voiceover</option>
-              <option>Presenter</option>
-              <option>Other</option>
+              <option value="" data-i18n="ph.selectCategory">اختر تصنيفاً</option>
             </select>
           </div>
           <div>
-            <label for="tEmail">Email (private)</label>
+            <label for="tEmail" data-i18n="lbl.emailPrivate">البريد الإلكتروني (خاص)</label>
             <input id="tEmail" type="email" required>
           </div>
           <div>
-            <label for="tPhone">Mobile, with country code (private)</label>
+            <label for="tPhone" data-i18n="lbl.mobilePrivate">رقم الجوال، مع رمز الدولة (خاص)</label>
             <input id="tPhone" required placeholder="+973 3xxx xxxx">
           </div>
           <div class="full">
-            <label for="tBio">Short bio</label>
-            <textarea id="tBio" placeholder="Experience, previous campaigns, languages…"></textarea>
+            <label for="tBio" data-i18n="lbl.shortBio">نبذة مختصرة</label>
+            <textarea id="tBio" data-i18n-placeholder="ph.bio" placeholder="الخبرة، حملات سابقة، اللغات…"></textarea>
           </div>
           <div>
-            <label for="tRate">Reference rate (optional)</label>
-            <input id="tRate" placeholder="e.g. From $300 / campaign">
+            <label for="tRate" data-i18n="lbl.refRate">السعر المرجعي (اختياري)</label>
+            <input id="tRate" data-i18n-placeholder="ph.refRate" placeholder="مثال: يبدأ من $300 للحملة">
           </div>
           <div>
-            <label for="tImage">Photo</label>
+            <label for="tImage" data-i18n="lbl.photo">صورة</label>
             <input id="tImage" type="file" accept="image/*">
           </div>
         </div>
-        <button class="btn full blue" style="margin-top:22px;" type="submit">Submit profile</button>
+        <button class="btn full blue" style="margin-top:22px;" type="submit" data-i18n="talent.submitBtn">أضف الملف</button>
         <p class="status-msg" id="talentStatus"></p>
       </form>
     </div>
@@ -102,8 +130,8 @@
 
 <footer>
   <div class="wrap">
-    <span>ONSET — production gear &amp; talent marketplace</span>
-    <span>Built on Supabase · Deployed on Vercel</span>
+    <span data-i18n="footer.tag">ONSET — سوق تأجير معدات الإنتاج وحجز الموديلات</span>
+    <span data-i18n="footer.built">مبني على Supabase · منشور على Vercel</span>
   </div>
 </footer>
 
@@ -111,59 +139,92 @@
 <div class="modal-bg" id="bidModalBg">
   <div class="modal">
     <button class="modal-close" id="bidModalClose">&times;</button>
-    <p class="sub" id="bidModalName">Talent</p>
-    <h3>Submit a bid</h3>
+    <p class="sub" id="bidModalName" data-i18n="modal.talentLbl">الموديل</p>
+    <h3 data-i18n="modal.bidTitle">قدّم مزايدة</h3>
     <form id="bidForm">
       <input type="hidden" id="bidTalentId">
       <div class="form-grid">
         <div class="full">
-          <label for="clientName">Your name</label>
+          <label for="clientName" data-i18n="lbl.yourName">اسمك الكامل</label>
           <input id="clientName" required>
         </div>
         <div>
-          <label for="clientEmail">Email</label>
+          <label for="clientEmail" data-i18n="lbl.email">البريد الإلكتروني</label>
           <input id="clientEmail" type="email" required>
         </div>
         <div>
-          <label for="clientPhone">Mobile (with country code)</label>
+          <label for="clientPhone" data-i18n="lbl.mobile">رقم الجوال (مع رمز الدولة)</label>
           <input id="clientPhone" required placeholder="+973 3xxx xxxx">
         </div>
         <div class="full">
-          <label for="bidAmount">Your bid (USD, total campaign budget)</label>
+          <label for="bidAmount" data-i18n="lbl.bidAmount">مزايدتك (USD، إجمالي ميزانية الحملة)</label>
           <input id="bidAmount" type="number" min="0" step="1" required>
         </div>
         <div class="full">
-          <label for="campaignDetails">Campaign details</label>
-          <textarea id="campaignDetails" placeholder="Product, shoot dates, location, usage rights needed…"></textarea>
+          <label for="campaignDetails" data-i18n="lbl.campaignDet">تفاصيل الحملة</label>
+          <textarea id="campaignDetails" data-i18n-placeholder="ph.campaignDet" placeholder="المنتج، مواعيد التصوير، الموقع، حقوق الاستخدام المطلوبة…"></textarea>
         </div>
       </div>
-      <div class="notice">By submitting, you acknowledge that if this bid is accepted, the site will email you the final total cost the talent charges, and that <b>20% of that amount is due upfront in USDT (ERC-20)</b> before work begins. The remaining balance is arranged directly with the talent.</div>
-      <button class="btn full blue" style="margin-top:18px;" type="submit">Submit bid</button>
+      <div class="notice" data-i18n="modal.bidNotice">بإرسالك هذه المزايدة، فإنك توافق على أنه في حال قبولها سيصلك بريد يوضح التكلفة النهائية التي يحددها الموديل، وأن ٢٠٪ من هذا المبلغ مستحقة مقدماً بعملة USDT (شبكة ERC-20) قبل بدء العمل. الباقي يُتفق عليه مباشرة مع الموديل.</div>
+      <button class="btn full blue" style="margin-top:18px;" type="submit" data-i18n="talent.sendBid">أرسل المزايدة</button>
       <p class="status-msg" id="bidStatus"></p>
     </form>
   </div>
 </div>
 
 <script type="module">
-import { sb, escapeHtml, setStatus, uploadImage } from './app.js';
+import { sb, escapeHtml, setStatus, uploadImage, initI18n, onLangChange, t, catLabel, formatMoney, TALENT_CATEGORIES, loadPublicBids } from './app.js';
+
+const tCategorySelect = document.getElementById('tCategory');
+function buildCategoryUI() {
+  const placeholderOpt = tCategorySelect.querySelector('option[value=""]');
+  tCategorySelect.innerHTML = '';
+  tCategorySelect.appendChild(placeholderOpt);
+  TALENT_CATEGORIES.forEach(cat => {
+    const opt = document.createElement('option');
+    opt.value = cat; opt.textContent = catLabel(cat);
+    tCategorySelect.appendChild(opt);
+  });
+}
+buildCategoryUI();
 
 let allTalent = [];
+let bidsByTalent = new Map();
+
+function bidBoxHtml(id) {
+  const bids = bidsByTalent.get(id) || [];
+  if (!bids.length) {
+    return `<div class="bid-box empty">${t('talent.noBids')}</div>`;
+  }
+  const top = bids[0];
+  const recent = bids.slice(0, 3);
+  const countWord = bids.length === 1 ? t('talent.bidsCount') : t('talent.bidsCountPl');
+  return `
+    <div class="bid-box">
+      <div class="top-bid"><span>${t('talent.topBid')}</span><b>${formatMoney(top.bid_amount)} — ${escapeHtml(top.client_name)}</b></div>
+      <div class="bid-count">${bids.length} ${countWord}</div>
+      <ul class="recent-bids">
+        ${recent.map(b => `<li><span>${escapeHtml(b.client_name)}</span><b>${formatMoney(b.bid_amount)}</b></li>`).join('')}
+      </ul>
+    </div>`;
+}
 
 function renderTalent() {
   const grid = document.getElementById('talentGrid');
   if (!allTalent.length) {
-    grid.innerHTML = '<div class="empty">No talent registered yet. Be the first to join below.</div>';
+    grid.innerHTML = `<div class="empty">${t('talent.empty')}</div>`;
     return;
   }
-  grid.innerHTML = allTalent.map(t => `
+  grid.innerHTML = allTalent.map(tal => `
     <div class="card">
-      <img class="thumb" src="${t.image_url ? escapeHtml(t.image_url) : 'https://placehold.co/480x360/e4e9f7/12203f?text=No+Photo'}" alt="${escapeHtml(t.name)}">
+      <img class="thumb" src="${tal.image_url ? escapeHtml(tal.image_url) : 'https://placehold.co/480x360/e4e9f7/12203f?text=No+Photo'}" alt="${escapeHtml(tal.name)}">
       <div class="body">
-        <p class="badge">${escapeHtml(t.category)}</p>
-        <h4>${escapeHtml(t.name)}</h4>
-        <p class="meta">${t.rate_reference ? escapeHtml(t.rate_reference) : 'Rate on request'}</p>
-        <p style="font-size:13px; color:var(--ink-soft); margin:0 0 14px;">${escapeHtml((t.bio || '').slice(0,110))}${(t.bio||'').length>110?'…':''}</p>
-        <button class="btn full outline" data-id="${t.id}" data-name="${escapeHtml(t.name)}">Submit a bid</button>
+        <p class="badge">${escapeHtml(catLabel(tal.category))}</p>
+        <h4>${escapeHtml(tal.name)}</h4>
+        <p class="meta">${tal.rate_reference ? escapeHtml(tal.rate_reference) : t('talent.rateOnReq')}</p>
+        <p style="font-size:13px; color:var(--ink-soft); margin:0 0 14px;">${escapeHtml((tal.bio || '').slice(0,110))}${(tal.bio||'').length>110?'…':''}</p>
+        ${bidBoxHtml(tal.id)}
+        <button class="btn full outline" data-id="${tal.id}" data-name="${escapeHtml(tal.name)}">${t('talent.bidBtn')}</button>
       </div>
     </div>
   `).join('');
@@ -178,11 +239,12 @@ async function loadTalent() {
     .order('created_at', { ascending: false });
   const grid = document.getElementById('talentGrid');
   if (error) {
-    grid.innerHTML = '<div class="empty">Could not load profiles right now.</div>';
+    grid.innerHTML = `<div class="empty">${t('talent.error')}</div>`;
     console.error(error);
     return;
   }
   allTalent = data || [];
+  bidsByTalent = await loadPublicBids();
   renderTalent();
 }
 loadTalent();
@@ -194,7 +256,7 @@ talentForm.addEventListener('submit', async (e) => {
   const statusEl = document.getElementById('talentStatus');
   const submitBtn = talentForm.querySelector('button[type=submit]');
   submitBtn.disabled = true;
-  setStatus(statusEl, 'Uploading…');
+  setStatus(statusEl, t('status.uploading'));
   try {
     const file = document.getElementById('tImage').files[0];
     const image_url = file ? await uploadImage('talent-images', file) : null;
@@ -208,12 +270,12 @@ talentForm.addEventListener('submit', async (e) => {
       image_url,
     });
     if (error) throw error;
-    setStatus(statusEl, 'Profile submitted. It now appears above.', 'ok');
+    setStatus(statusEl, t('talent.submitOk'), 'ok');
     talentForm.reset();
     loadTalent();
   } catch (err) {
     console.error(err);
-    setStatus(statusEl, 'Something went wrong submitting your profile. Please try again.', 'err');
+    setStatus(statusEl, t('talent.submitErr'), 'err');
   } finally {
     submitBtn.disabled = false;
   }
@@ -235,7 +297,7 @@ bidForm.addEventListener('submit', async (e) => {
   const statusEl = document.getElementById('bidStatus');
   const submitBtn = bidForm.querySelector('button[type=submit]');
   submitBtn.disabled = true;
-  setStatus(statusEl, 'Sending…');
+  setStatus(statusEl, t('status.sending'));
   try {
     const { error } = await sb.from('talent_bids').insert({
       talent_id: document.getElementById('bidTalentId').value,
@@ -246,16 +308,21 @@ bidForm.addEventListener('submit', async (e) => {
       campaign_details: document.getElementById('campaignDetails').value.trim(),
     });
     if (error) throw error;
-    setStatus(statusEl, 'Bid submitted. You will be contacted about next steps.', 'ok');
+    setStatus(statusEl, t('talent.bidOk'), 'ok');
     bidForm.reset();
+    bidsByTalent = await loadPublicBids();
+    renderTalent();
     setTimeout(() => { modalBg.classList.remove('open'); setStatus(statusEl, ''); }, 1800);
   } catch (err) {
     console.error(err);
-    setStatus(statusEl, 'Could not submit your bid. Please try again.', 'err');
+    setStatus(statusEl, t('talent.bidErr'), 'err');
   } finally {
     submitBtn.disabled = false;
   }
 });
+
+initI18n();
+onLangChange(() => { buildCategoryUI(); renderTalent(); });
 </script>
 
 </body>

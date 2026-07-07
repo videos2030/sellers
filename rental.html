@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rent Gear — Onset</title>
+<title>Onset — تأجير المعدات</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,18 +14,52 @@
 <nav class="nav">
   <div class="wrap">
     <a href="index.html" class="brand">ON<span>SET</span></a>
-    <ul class="nav-links">
-      <li><a href="rental.html" class="active">Gear</a></li>
-      <li><a href="talent.html">Talent</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="rental.html" class="active" data-i18n="nav.gear">المعدات</a></li>
+        <li><a href="talent.html" data-i18n="nav.talent">الموديلات</a></li>
+      </ul>
+      <button class="lang-toggle" id="langToggle">English</button>
+    </div>
   </div>
 </nav>
 
-<header class="hero" style="padding:56px 0 40px;">
+<header class="hero" style="padding:52px 0 36px;">
   <div class="wrap">
-    <p class="eyebrow" style="color:#9BA0AA;">Equipment marketplace</p>
-    <h1 style="font-size:clamp(40px,7vw,72px);">GEAR</h1>
-    <p class="tag">Cameras, lenses, lighting, audio and grip — available direct from other production owners.</p>
+    <div class="hero-copy">
+      <p class="eyebrow" style="color:#9BA0AA;" data-i18n="rental.eyebrow">سوق المعدات</p>
+      <h1 style="font-size:clamp(38px,6vw,64px);" data-i18n="rental.h1">المعدات</h1>
+      <p class="tag" data-i18n="rental.tag">كاميرات، عدسات، إضاءة، صوت، كابلات ومهمات ميدانية — جاهزة للتأجير والشحن مباشرة من أصحاب شركات الإنتاج.</p>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Camera, coiled cable and wrench still life">
+        <defs>
+          <radialGradient id="glowAmber" cx="0.5" cy="0.5" r="0.6">
+            <stop offset="0" stop-color="#FFB74A" stop-opacity="0.35"/>
+            <stop offset="1" stop-color="#FFB74A" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="300" cy="120" r="140" fill="url(#glowAmber)"/>
+        <!-- coiled cable -->
+        <path d="M40,280 C40,220 120,220 120,170 C120,120 60,120 60,80" fill="none" stroke="#33373E" stroke-width="10" stroke-linecap="round"/>
+        <path d="M40,280 C40,220 120,220 120,170 C120,120 60,120 60,80" fill="none" stroke="#FFB74A" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 14"/>
+        <!-- camera body -->
+        <g transform="translate(150,110)">
+          <rect x="0" y="30" width="160" height="100" rx="8" fill="#1C1F26" stroke="#33373E"/>
+          <rect x="20" y="6" width="60" height="30" rx="4" fill="#1C1F26" stroke="#33373E"/>
+          <circle cx="80" cy="80" r="42" fill="#14161A" stroke="#3A3F48"/>
+          <circle cx="80" cy="80" r="30" fill="#0D0E10" stroke="#FFB74A" stroke-width="2"/>
+          <circle cx="80" cy="80" r="10" fill="#2A2E35"/>
+          <rect x="130" y="46" width="18" height="14" rx="2" fill="#FFB74A"/>
+          <circle cx="20" cy="46" r="6" fill="#6C93EE"/>
+        </g>
+        <!-- wrench -->
+        <g transform="translate(300,220) rotate(24)">
+          <rect x="-6" y="0" width="12" height="70" rx="4" fill="#55595F"/>
+          <circle cx="0" cy="-6" r="16" fill="none" stroke="#55595F" stroke-width="8"/>
+        </g>
+      </svg>
+    </div>
   </div>
 </header>
 
@@ -32,18 +67,18 @@
   <div class="wrap">
     <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
       <div>
-        <p class="eyebrow">Available now</p>
-        <h2 class="section-title">Browse listings</h2>
+        <p class="eyebrow" data-i18n="rental.available">متوفر الآن</p>
+        <h2 class="section-title" data-i18n="rental.browse">تصفّح القوائم</h2>
       </div>
-      <a href="#list-gear" class="btn amber">List your gear</a>
+      <a href="#list-gear" class="btn amber" data-i18n="rental.listBtn">أضف معداتك</a>
     </div>
 
     <div class="chips" id="categoryChips">
-      <button class="chip active" data-cat="all">All</button>
+      <button class="chip active" data-cat="all" data-i18n="rental.chipAll">الكل</button>
     </div>
 
     <div class="grid" id="equipmentGrid" style="margin-top:24px;">
-      <div class="empty">Loading listings…</div>
+      <div class="empty" data-i18n="rental.loading">جاري تحميل القوائم…</div>
     </div>
   </div>
 </section>
@@ -51,60 +86,54 @@
 <!-- LIST YOUR GEAR -->
 <section class="pad" id="list-gear">
   <div class="wrap">
-    <p class="eyebrow" style="color:var(--ink-soft)">Own equipment?</p>
-    <h2 class="section-title">List your gear</h2>
-    <p style="max-width:56ch; color:var(--ink-soft)">Add a listing so renters can find it and reach out. Your contact details go to the renter when they submit a request — nothing is shared beyond this site.</p>
+    <p class="eyebrow" style="color:var(--ink-soft)" data-i18n="rental.ownEq">عندك معدات؟</p>
+    <h2 class="section-title" data-i18n="rental.listTitle">أضف معداتك للتأجير</h2>
+    <p style="max-width:56ch; color:var(--ink-soft)" data-i18n="rental.listP">أضف قائمة ليجدها المستأجرون ويتواصلون معك. بياناتك تُرسل للمستأجر فقط عند إرسال طلب — لا شيء يُشارك خارج الموقع.</p>
 
     <div class="panel" style="margin-top:24px;">
-      <p class="sub" style="font-family:var(--mono); font-size:12px; color:#9BA0AA;">Listing form</p>
+      <p class="sub" style="font-family:var(--mono); font-size:12px; color:#9BA0AA;" data-i18n="rental.formSub">فورم الإضافة</p>
       <form id="equipmentForm">
         <div class="form-grid">
           <div>
-            <label for="ownerName">Your name</label>
-            <input id="ownerName" required placeholder="Full name">
+            <label for="ownerName" data-i18n="lbl.yourName">اسمك الكامل</label>
+            <input id="ownerName" required data-i18n-placeholder="ph.fullName" placeholder="الاسم الكامل">
           </div>
           <div>
-            <label for="ownerEmail">Email</label>
+            <label for="ownerEmail" data-i18n="lbl.email">البريد الإلكتروني</label>
             <input id="ownerEmail" type="email" required placeholder="you@example.com">
           </div>
           <div>
-            <label for="ownerPhone">Mobile number (with country code)</label>
+            <label for="ownerPhone" data-i18n="lbl.mobile">رقم الجوال (مع رمز الدولة)</label>
             <input id="ownerPhone" required placeholder="+973 3xxx xxxx">
           </div>
           <div>
-            <label for="category">Category</label>
+            <label for="category" data-i18n="lbl.category">التصنيف</label>
             <select id="category" required>
-              <option value="">Select a category</option>
-              <option>Cameras</option>
-              <option>Lenses</option>
-              <option>Lighting</option>
-              <option>Audio</option>
-              <option>Grip &amp; Rigging</option>
-              <option>Drones</option>
-              <option>Monitors &amp; Video</option>
-              <option>Computers &amp; Storage</option>
-              <option>Studio &amp; Decor</option>
-              <option>Other</option>
+              <option value="" data-i18n="ph.selectCategory">اختر تصنيفاً</option>
             </select>
           </div>
           <div class="full">
-            <label for="title">Item title</label>
-            <input id="title" required placeholder="e.g. Sony FX3 Cinema Camera">
+            <label for="title" data-i18n="lbl.itemTitle">اسم القطعة</label>
+            <input id="title" required data-i18n-placeholder="ph.itemTitle" placeholder="مثال: كاميرا Sony FX3 السينمائية">
           </div>
           <div class="full">
-            <label for="description">Description</label>
-            <textarea id="description" placeholder="Condition, included accessories, pickup location…"></textarea>
+            <label for="description" data-i18n="lbl.description">الوصف</label>
+            <textarea id="description" data-i18n-placeholder="ph.eqDesc" placeholder="الحالة، الملحقات المرفقة، مكان الاستلام…"></textarea>
           </div>
           <div>
-            <label for="price">Price per day (USD)</label>
+            <label for="price" data-i18n="lbl.pricePerDay">السعر لليوم الواحد (USD)</label>
             <input id="price" type="number" min="0" step="0.01" placeholder="80">
           </div>
           <div>
-            <label for="image">Photo</label>
+            <label for="image" data-i18n="lbl.photo">صورة</label>
             <input id="image" type="file" accept="image/*">
           </div>
+          <div class="full check-row">
+            <input type="checkbox" id="shipsAvailable" checked>
+            <label for="shipsAvailable" data-i18n="lbl.shipsToggle">أوافق على شحن هذه القطعة لعملاء خارج مدينتي</label>
+          </div>
         </div>
-        <button class="btn full amber" style="margin-top:22px;" type="submit">Submit listing</button>
+        <button class="btn full amber" style="margin-top:22px;" type="submit" data-i18n="rental.submitBtn">أضف القائمة</button>
         <p class="status-msg" id="equipmentStatus"></p>
       </form>
     </div>
@@ -113,8 +142,8 @@
 
 <footer>
   <div class="wrap">
-    <span>ONSET — production gear &amp; talent marketplace</span>
-    <span>Built on Supabase · Deployed on Vercel</span>
+    <span data-i18n="footer.tag">ONSET — سوق تأجير معدات الإنتاج وحجز الموديلات</span>
+    <span data-i18n="footer.built">مبني على Supabase · منشور على Vercel</span>
   </div>
 </footer>
 
@@ -122,53 +151,67 @@
 <div class="modal-bg" id="requestModalBg">
   <div class="modal">
     <button class="modal-close" id="requestModalClose">&times;</button>
-    <p class="sub" id="requestModalItem">Item</p>
-    <h3>Request to rent</h3>
+    <p class="sub" id="requestModalItem" data-i18n="modal.itemLbl">القطعة</p>
+    <h3 data-i18n="modal.reqTitle">اطلب التأجير</h3>
     <form id="requestForm">
       <input type="hidden" id="requestEquipmentId">
       <div class="form-grid">
         <div class="full">
-          <label for="renterName">Your name</label>
+          <label for="renterName" data-i18n="lbl.yourName">اسمك الكامل</label>
           <input id="renterName" required>
         </div>
         <div>
-          <label for="renterEmail">Email</label>
+          <label for="renterEmail" data-i18n="lbl.email">البريد الإلكتروني</label>
           <input id="renterEmail" type="email" required>
         </div>
         <div>
-          <label for="renterPhone">Mobile (with country code)</label>
+          <label for="renterPhone" data-i18n="lbl.mobile">رقم الجوال (مع رمز الدولة)</label>
           <input id="renterPhone" required placeholder="+973 3xxx xxxx">
         </div>
         <div>
-          <label for="startDate">Start date</label>
+          <label for="startDate" data-i18n="lbl.startDate">تاريخ البداية</label>
           <input id="startDate" type="date">
         </div>
         <div>
-          <label for="endDate">End date</label>
+          <label for="endDate" data-i18n="lbl.endDate">تاريخ النهاية</label>
           <input id="endDate" type="date">
         </div>
         <div class="full">
-          <label for="reqMessage">Message (optional)</label>
-          <textarea id="reqMessage" placeholder="Anything the owner should know"></textarea>
+          <label for="reqMessage" data-i18n="lbl.messageOpt">ملاحظات (اختياري)</label>
+          <textarea id="reqMessage" data-i18n-placeholder="ph.reqMessage" placeholder="أي شيء يحتاج صاحب المعدة معرفته"></textarea>
         </div>
       </div>
-      <div class="notice">The owner will contact you directly by email or phone to confirm availability, final price, and pickup details.</div>
-      <button class="btn full amber" style="margin-top:18px;" type="submit">Send request</button>
+      <div class="notice" data-i18n="modal.reqNotice">سيتواصل معك صاحب المعدة مباشرة عبر البريد أو الجوال لتأكيد التوفر والسعر النهائي وتفاصيل الاستلام أو الشحن.</div>
+      <button class="btn full amber" style="margin-top:18px;" type="submit" data-i18n="rental.sendReq">أرسل الطلب</button>
       <p class="status-msg" id="requestStatus"></p>
     </form>
   </div>
 </div>
 
 <script type="module">
-import { sb, escapeHtml, setStatus, uploadImage, formatMoney } from './app.js';
+import { sb, escapeHtml, setStatus, uploadImage, formatMoney, initI18n, onLangChange, getLang, t, catLabel, GEAR_CATEGORIES } from './app.js';
 
-const CATEGORIES = ['Cameras','Lenses','Lighting','Audio','Grip & Rigging','Drones','Monitors & Video','Computers & Storage','Studio & Decor','Other'];
+// ---- category chips + form select (populated from shared list, translated) ----
 const chipsEl = document.getElementById('categoryChips');
-CATEGORIES.forEach(cat => {
-  const b = document.createElement('button');
-  b.className = 'chip'; b.dataset.cat = cat; b.textContent = cat;
-  chipsEl.appendChild(b);
-});
+const categorySelect = document.getElementById('category');
+
+function buildCategoryUI() {
+  chipsEl.querySelectorAll('.chip:not([data-cat="all"])').forEach(el => el.remove());
+  GEAR_CATEGORIES.forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'chip'; b.dataset.cat = cat; b.textContent = catLabel(cat);
+    chipsEl.appendChild(b);
+  });
+  const placeholderOpt = categorySelect.querySelector('option[value=""]');
+  categorySelect.innerHTML = '';
+  categorySelect.appendChild(placeholderOpt);
+  GEAR_CATEGORIES.forEach(cat => {
+    const opt = document.createElement('option');
+    opt.value = cat; opt.textContent = catLabel(cat);
+    categorySelect.appendChild(opt);
+  });
+}
+buildCategoryUI();
 
 let allEquipment = [];
 let activeCat = 'all';
@@ -177,17 +220,20 @@ function renderGrid() {
   const grid = document.getElementById('equipmentGrid');
   const items = activeCat === 'all' ? allEquipment : allEquipment.filter(e => e.category === activeCat);
   if (!items.length) {
-    grid.innerHTML = '<div class="empty">No listings in this category yet. Be the first — list your gear below.</div>';
+    grid.innerHTML = `<div class="empty">${t('rental.empty')}</div>`;
     return;
   }
   grid.innerHTML = items.map(e => `
     <div class="card">
-      <img class="thumb" src="${e.image_url ? escapeHtml(e.image_url) : 'https://placehold.co/480x360/eee2d8/33373e?text=No+Photo'}" alt="${escapeHtml(e.title)}">
+      <div class="thumb-wrap">
+        <img class="thumb" src="${e.image_url ? escapeHtml(e.image_url) : 'https://placehold.co/480x360/eee2d8/33373e?text=No+Photo'}" alt="${escapeHtml(e.title)}">
+        ${e.ships_available ? `<span class="ships-badge">${t('rental.ships')}</span>` : ''}
+      </div>
       <div class="body">
-        <p class="badge">${escapeHtml(e.category)}</p>
+        <p class="badge">${escapeHtml(catLabel(e.category))}</p>
         <h4>${escapeHtml(e.title)}</h4>
-        <p class="meta">${e.price_per_day ? formatMoney(e.price_per_day) + ' / day' : 'Price on request'} · Listed by ${escapeHtml(e.owner_name)}</p>
-        <button class="btn full outline" data-id="${e.id}" data-title="${escapeHtml(e.title)}">Request to rent</button>
+        <p class="meta">${e.price_per_day ? formatMoney(e.price_per_day) + ' ' + t('rental.perDay') : t('rental.onRequest')} · ${t('rental.listedBy')} ${escapeHtml(e.owner_name)}</p>
+        <button class="btn full outline" data-id="${e.id}" data-title="${escapeHtml(e.title)}">${t('rental.reqBtn')}</button>
       </div>
     </div>
   `).join('');
@@ -209,7 +255,7 @@ async function loadEquipment() {
   const { data, error } = await sb.from('equipment').select('*').order('created_at', { ascending: false });
   const grid = document.getElementById('equipmentGrid');
   if (error) {
-    grid.innerHTML = '<div class="empty">Could not load listings right now.</div>';
+    grid.innerHTML = `<div class="empty">${t('rental.error')}</div>`;
     console.error(error);
     return;
   }
@@ -225,7 +271,7 @@ equipmentForm.addEventListener('submit', async (e) => {
   const statusEl = document.getElementById('equipmentStatus');
   const submitBtn = equipmentForm.querySelector('button[type=submit]');
   submitBtn.disabled = true;
-  setStatus(statusEl, 'Uploading…');
+  setStatus(statusEl, t('status.uploading'));
   try {
     const file = document.getElementById('image').files[0];
     const image_url = file ? await uploadImage('equipment-images', file) : null;
@@ -238,14 +284,16 @@ equipmentForm.addEventListener('submit', async (e) => {
       description: document.getElementById('description').value.trim(),
       price_per_day: document.getElementById('price').value || null,
       image_url,
+      ships_available: document.getElementById('shipsAvailable').checked,
     });
     if (error) throw error;
-    setStatus(statusEl, 'Listing submitted. It now appears above.', 'ok');
+    setStatus(statusEl, t('rental.submitOk'), 'ok');
     equipmentForm.reset();
+    document.getElementById('shipsAvailable').checked = true;
     loadEquipment();
   } catch (err) {
     console.error(err);
-    setStatus(statusEl, 'Something went wrong submitting your listing. Please try again.', 'err');
+    setStatus(statusEl, t('rental.submitErr'), 'err');
   } finally {
     submitBtn.disabled = false;
   }
@@ -267,7 +315,7 @@ requestForm.addEventListener('submit', async (e) => {
   const statusEl = document.getElementById('requestStatus');
   const submitBtn = requestForm.querySelector('button[type=submit]');
   submitBtn.disabled = true;
-  setStatus(statusEl, 'Sending…');
+  setStatus(statusEl, t('status.sending'));
   try {
     const { error } = await sb.from('rental_requests').insert({
       equipment_id: document.getElementById('requestEquipmentId').value,
@@ -279,16 +327,19 @@ requestForm.addEventListener('submit', async (e) => {
       message: document.getElementById('reqMessage').value.trim(),
     });
     if (error) throw error;
-    setStatus(statusEl, 'Request sent. The owner will contact you directly.', 'ok');
+    setStatus(statusEl, t('rental.reqOk'), 'ok');
     requestForm.reset();
     setTimeout(() => { modalBg.classList.remove('open'); setStatus(statusEl, ''); }, 1800);
   } catch (err) {
     console.error(err);
-    setStatus(statusEl, 'Could not send your request. Please try again.', 'err');
+    setStatus(statusEl, t('rental.reqErr'), 'err');
   } finally {
     submitBtn.disabled = false;
   }
 });
+
+initI18n();
+onLangChange(() => { buildCategoryUI(); renderGrid(); });
 </script>
 
 </body>

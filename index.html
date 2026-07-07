@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Onset — Production gear and talent, booked direct</title>
-<meta name="description" content="List your production gear for rent, or book on-camera talent for your next shoot. No sign-in required.">
+<title>Onset — معدات إنتاج وموديلات، مباشرة</title>
+<meta name="description" content="أجّر معداتك أو استأجر معدات إنتاج، واحجز موديل لحملتك القادمة. بدون تسجيل دخول.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Cairo:wght@600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -14,44 +15,82 @@
 <nav class="nav">
   <div class="wrap">
     <a href="index.html" class="brand">ON<span>SET</span></a>
-    <ul class="nav-links">
-      <li><a href="rental.html">Gear</a></li>
-      <li><a href="talent.html">Talent</a></li>
-    </ul>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="rental.html" data-i18n="nav.gear">المعدات</a></li>
+        <li><a href="talent.html" data-i18n="nav.talent">الموديلات</a></li>
+      </ul>
+      <button class="lang-toggle" id="langToggle">English</button>
+    </div>
   </div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
-    <div class="hero-frame">
-      <span class="c2"></span><span class="c3"></span>
-      <h1>ONSET</h1>
+    <div class="hero-copy">
+      <div class="hero-frame">
+        <span class="c2"></span><span class="c3"></span>
+        <h1>ONSET</h1>
+      </div>
+      <p class="tag" data-i18n="home.tag">أجّر المعدات النائمة في شنطتك، واحجز الموديل التي تحتاجها حملتك — كل شيء في مكان واحد وبدون أي تسجيل حساب.</p>
+      <div class="spec-plate">
+        <span data-i18n="home.plate1">المعدات · كاميرات، إضاءة، صوت، كابلات ومهمات ميدانية</span>
+        <span data-i18n="home.plate2">الموديلات · مزايدة وحجز مباشر أمام الكاميرا</span>
+        <span data-i18n="home.plate3">بدون تسجيل دخول · مجرد فورم</span>
+      </div>
     </div>
-    <p class="tag">Rent out the gear sitting in your case. Book the talent your campaign needs. One place, no account required.</p>
-    <div class="spec-plate">
-      <span><b>GEAR</b> · cameras, lighting, audio, grip</span>
-      <span><b>TALENT</b> · on-camera bidding &amp; booking</span>
-      <span><b>NO SIGN-IN</b> · just a form</span>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Clapperboard splitting into a gear beam and a talent spotlight">
+        <defs>
+          <linearGradient id="beamAmber" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#FFB74A" stop-opacity="0.55"/>
+            <stop offset="1" stop-color="#FFB74A" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="beamBlue" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#6C93EE" stop-opacity="0.55"/>
+            <stop offset="1" stop-color="#6C93EE" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <polygon points="210,150 40,400 160,400" fill="url(#beamAmber)"/>
+        <polygon points="210,150 380,400 260,400" fill="url(#beamBlue)"/>
+        <g transform="translate(95,60) rotate(-6)">
+          <rect x="0" y="34" width="230" height="130" rx="4" fill="#1C1F26" stroke="#33373E"/>
+          <g>
+            <rect x="0" y="0" width="230" height="34" fill="#F3F0E9"/>
+            <g fill="#14161A">
+              <polygon points="0,0 26,0 6,34 -20,34"/>
+              <polygon points="52,0 78,0 58,34 32,34"/>
+              <polygon points="104,0 130,0 110,34 84,34"/>
+              <polygon points="156,0 182,0 162,34 136,34"/>
+              <polygon points="208,0 234,0 214,34 188,34"/>
+            </g>
+          </g>
+          <text x="18" y="95" font-family="IBM Plex Mono, monospace" font-size="15" fill="#9BA0AA" letter-spacing="2">ONSET</text>
+          <text x="18" y="122" font-family="IBM Plex Mono, monospace" font-size="12" fill="#FFB74A">GEAR ⟵</text>
+          <text x="152" y="122" font-family="IBM Plex Mono, monospace" font-size="12" fill="#6C93EE">⟶ TALENT</text>
+          <circle cx="205" cy="150" r="6" fill="#FFB74A"/>
+        </g>
+      </svg>
     </div>
   </div>
 </header>
 
 <section class="pad">
   <div class="wrap">
-    <p class="eyebrow">Choose a lane</p>
-    <h2 class="section-title">Where do you want to start?</h2>
+    <p class="eyebrow" data-i18n="home.chooseLane">اختر وجهتك</p>
+    <h2 class="section-title" data-i18n="home.whereStart">من وين تبي تبدأ؟</h2>
     <div class="lanes">
       <a href="rental.html" class="lane gear">
-        <span class="tab">Equipment</span>
-        <h3>Rent Gear</h3>
-        <p>Browse cameras, lenses, lighting and audio kit available from other production owners — or list your own equipment for rent in a couple of minutes.</p>
-        <span class="go">Browse gear →</span>
+        <span class="tab" data-i18n="home.laneGearTab">المعدات</span>
+        <h3 data-i18n="home.laneGearH">أجّر معدات</h3>
+        <p data-i18n="home.laneGearP">تصفّح كاميرات وعدسات وإضاءة وصوت وكابلات وملحقات متوفرة الآن للتأجير والشحن — أو أضف معداتك الخاصة للتأجير خلال دقائق.</p>
+        <span class="go" data-i18n="home.laneGearGo">تصفّح المعدات ←</span>
       </a>
       <a href="talent.html" class="lane talent">
-        <span class="tab">Models &amp; talent</span>
-        <h3>Book Talent</h3>
-        <p>Look through talent registered to represent products and campaigns, then submit a bid with your budget and shoot details.</p>
-        <span class="go">Browse talent →</span>
+        <span class="tab" data-i18n="home.laneTalTab">موديلات وممثلين</span>
+        <h3 data-i18n="home.laneTalH">احجز موديل</h3>
+        <p data-i18n="home.laneTalP">تصفّح الموديلات المسجّلين لتمثيل حملات ومنتجات، وقدّم مزايدتك مع ميزانيتك وتفاصيل التصوير.</p>
+        <span class="go" data-i18n="home.laneTalGo">تصفّح الموديلات ←</span>
       </a>
     </div>
   </div>
@@ -59,23 +98,23 @@
 
 <section class="pad">
   <div class="wrap">
-    <p class="eyebrow">How it works</p>
-    <h2 class="section-title">Simple on both sides</h2>
+    <p class="eyebrow" data-i18n="home.howEyebrow">كيف تعمل المنصة</p>
+    <h2 class="section-title" data-i18n="home.howTitle">بسيطة للطرفين</h2>
     <div class="grid" style="margin-top:36px;">
       <div class="card"><div class="body">
-        <p class="badge">Step 1</p>
-        <h4>Post or browse</h4>
-        <p class="meta" style="color:var(--ink-soft)">List a piece of gear or a talent profile in one form — or browse what's already listed.</p>
+        <p class="badge" data-i18n="home.step1">الخطوة ١</p>
+        <h4 data-i18n="home.step1H">انشر أو تصفّح</h4>
+        <p class="meta" style="color:var(--ink-soft)" data-i18n="home.step1P">أضف معدة أو ملف موديل بفورم واحد — أو تصفّح ما هو منشور بالفعل.</p>
       </div></div>
       <div class="card"><div class="body">
-        <p class="badge">Step 2</p>
-        <h4>Send a request</h4>
-        <p class="meta" style="color:var(--ink-soft)">Renters and clients submit a request or bid with their contact details directly to the owner.</p>
+        <p class="badge" data-i18n="home.step2">الخطوة ٢</p>
+        <h4 data-i18n="home.step2H">أرسل طلبك</h4>
+        <p class="meta" style="color:var(--ink-soft)" data-i18n="home.step2P">المستأجرون والعملاء يرسلون طلبهم أو مزايدتهم مع بياناتهم مباشرة لصاحب المعدة أو الموديل.</p>
       </div></div>
       <div class="card"><div class="body">
-        <p class="badge">Step 3</p>
-        <h4>Confirm off-platform</h4>
-        <p class="meta" style="color:var(--ink-soft)">Owners follow up by phone or email to confirm dates, rates, and any deposit before work begins.</p>
+        <p class="badge" data-i18n="home.step3">الخطوة ٣</p>
+        <h4 data-i18n="home.step3H">أكّدوا مباشرة</h4>
+        <p class="meta" style="color:var(--ink-soft)" data-i18n="home.step3P">التأكيد النهائي للمواعيد والأسعار والدفعة المقدّمة يتم بالاتصال المباشر.</p>
       </div></div>
     </div>
   </div>
@@ -83,10 +122,15 @@
 
 <footer>
   <div class="wrap">
-    <span>ONSET — production gear &amp; talent marketplace</span>
-    <span>Built on Supabase · Deployed on Vercel</span>
+    <span data-i18n="footer.tag">ONSET — سوق تأجير معدات الإنتاج وحجز الموديلات</span>
+    <span data-i18n="footer.built">مبني على Supabase · منشور على Vercel</span>
   </div>
 </footer>
+
+<script type="module">
+import { initI18n } from './app.js';
+initI18n();
+</script>
 
 </body>
 </html>
