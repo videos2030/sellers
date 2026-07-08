@@ -179,16 +179,9 @@
 </div>
 
 <script type="module">
-import { getSb, escapeHtml, setStatus, uploadImage, formatMoney, initI18n, onLangChange, t, PLATFORMS, platformIcon, loadPublicSubmissions } from './app.js';
+import { sb, escapeHtml, setStatus, uploadImage, formatMoney, initI18n, onLangChange, t, PLATFORMS, platformIcon, loadPublicSubmissions } from './app.js';
 
 initI18n();
-
-let sb = null;
-try {
-  sb = await getSb();
-} catch (err) {
-  console.error(err);
-}
 
 let allInfluencers = [];
 let subsByInfluencer = new Map();
@@ -246,7 +239,6 @@ function renderCampaigns() {
 
 async function loadCampaigns() {
   const grid = document.getElementById('campaignGrid');
-  if (!sb) { grid.innerHTML = `<div class="empty">${t('camp.error')}</div>`; return; }
   const { data, error } = await sb.from('influencers')
     .select('id,name,bio,rate_per_1000_views,image_url,youtube_url,instagram_url,tiktok_url,x_url,facebook_url,created_at')
     .order('created_at', { ascending: false });
@@ -267,7 +259,6 @@ influencerForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const statusEl = document.getElementById('influencerStatus');
   const submitBtn = influencerForm.querySelector('button[type=submit]');
-  if (!sb) { setStatus(statusEl, t('camp.regErr'), 'err'); return; }
   submitBtn.disabled = true;
   setStatus(statusEl, t('status.uploading'));
   try {
@@ -313,7 +304,6 @@ subForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const statusEl = document.getElementById('subStatus');
   const submitBtn = subForm.querySelector('button[type=submit]');
-  if (!sb) { setStatus(statusEl, t('camp.subErr'), 'err'); return; }
   submitBtn.disabled = true;
   setStatus(statusEl, t('status.sending'));
   try {

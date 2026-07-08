@@ -190,18 +190,9 @@
 </div>
 
 <script type="module">
-import { getSb, escapeHtml, setStatus, uploadImage, formatMoney, initI18n, onLangChange, getLang, t, catLabel, GEAR_CATEGORIES } from './app.js';
+import { sb, escapeHtml, setStatus, uploadImage, formatMoney, initI18n, onLangChange, getLang, t, catLabel, GEAR_CATEGORIES } from './app.js';
 
-// Static translations + language toggle work immediately, even if the
-// Supabase connection below fails (e.g. env vars not set on this deploy).
 initI18n();
-
-let sb = null;
-try {
-  sb = await getSb();
-} catch (err) {
-  console.error(err);
-}
 
 // ---- category chips + form select (populated from shared list, translated) ----
 const chipsEl = document.getElementById('categoryChips');
@@ -265,7 +256,6 @@ chipsEl.addEventListener('click', (e) => {
 
 async function loadEquipment() {
   const grid = document.getElementById('equipmentGrid');
-  if (!sb) { grid.innerHTML = `<div class="empty">${t('rental.error')}</div>`; return; }
   const { data, error } = await sb.from('equipment').select('*').order('created_at', { ascending: false });
   if (error) {
     grid.innerHTML = `<div class="empty">${t('rental.error')}</div>`;
@@ -283,7 +273,6 @@ equipmentForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const statusEl = document.getElementById('equipmentStatus');
   const submitBtn = equipmentForm.querySelector('button[type=submit]');
-  if (!sb) { setStatus(statusEl, t('rental.submitErr'), 'err'); return; }
   submitBtn.disabled = true;
   setStatus(statusEl, t('status.uploading'));
   try {
@@ -328,7 +317,6 @@ requestForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const statusEl = document.getElementById('requestStatus');
   const submitBtn = requestForm.querySelector('button[type=submit]');
-  if (!sb) { setStatus(statusEl, t('rental.reqErr'), 'err'); return; }
   submitBtn.disabled = true;
   setStatus(statusEl, t('status.sending'));
   try {

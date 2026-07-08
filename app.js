@@ -1,24 +1,10 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-// ---- Supabase client ----
-// The URL/anon key are NOT hardcoded here. They're fetched once from
-// /api/config, a tiny Vercel serverless function that reads them from this
-// project's Environment Variables (see api/config.js). getSb() caches the
-// resulting client so the fetch only happens once per page load.
-let clientPromise = null;
-async function initClient() {
-  const res = await fetch('/api/config');
-  if (!res.ok) {
-    const body = await res.json().catch(() => ({}));
-    throw new Error(body.error || `Could not load Supabase config (HTTP ${res.status}). If you're running this locally, use \`vercel dev\` instead of opening the file directly.`);
-  }
-  const { supabaseUrl, supabaseAnonKey } = await res.json();
-  return createClient(supabaseUrl, supabaseAnonKey);
-}
-export function getSb() {
-  if (!clientPromise) clientPromise = initClient();
-  return clientPromise;
-}
+// ---- Supabase project config ----
+const SUPABASE_URL = 'https://vssedyrcnfjrzmibknhg.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzc2VkeXJjbmZqcnptaWJrbmhnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzOTk1NjMsImV4cCI6MjA5ODk3NTU2M30.TTQ8-AaYGxGgAScH7US84N6d57jGj16dsIvMTMwming';
+
+export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // ==========================================================
 // i18n — Arabic default, English toggle
@@ -27,7 +13,7 @@ export function getSb() {
 export const DICT = {
   'nav.gear':        { ar: 'المعدات', en: 'Gear' },
   'nav.talent':       { ar: 'الموديلز', en: 'Models' },
-  'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencer Campaigns' },
+  'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencers' },
   'nav.langBtn':      { ar: 'English', en: 'العربية' },
 
   // ---- Home ----
@@ -220,35 +206,6 @@ const CATEGORY_LABELS = {
   'Presenter':               { ar: 'مقدّم برامج',             en: 'Presenter' },
 };
 
-
-const CATEGORY_LABELS = {
-  // Gear categories
-  'Cameras':                 { ar: 'كاميرات',                 en: 'Cameras' },
-  'Lenses':                  { ar: 'عدسات',                   en: 'Lenses' },
-  'Lighting':                { ar: 'إضاءة',                   en: 'Lighting' },
-  'Audio':                   { ar: 'صوتيات',                  en: 'Audio' },
-  'Grip & Rigging':          { ar: 'جريب وتثبيت',             en: 'Grip & Rigging' },
-  'Drones':                  { ar: 'درونز',                   en: 'Drones' },
-  'Monitors & Video':        { ar: 'شاشات وفيديو',            en: 'Monitors & Video' },
-  'Computers & Storage':     { ar: 'أجهزة وتخزين',            en: 'Computers & Storage' },
-  'Studio & Decor':          { ar: 'استوديو وديكور',          en: 'Studio & Decor' },
-  'Cables & Connectors':     { ar: 'كابلات وتوصيلات',         en: 'Cables & Connectors' },
-  'Adapters':                { ar: 'محوّلات',                 en: 'Adapters' },
-  'Mounting & Rigging Tools':{ ar: 'أدوات تثبيت وتنظيم',      en: 'Mounting & Rigging Tools' },
-  'Cleaning & Maintenance':  { ar: 'تنظيف وصيانة',            en: 'Cleaning & Maintenance' },
-  'Storage & Transport':     { ar: 'تخزين ونقل',              en: 'Storage & Transport' },
-  'On-Location & Shade':     { ar: 'خيمة إنتاج وتظليل ميداني', en: 'On-Location & Shade' },
-  'Forgotten Essentials':    { ar: 'أساسيات لا تُنسى',        en: 'Forgotten Essentials' },
-  'Other':                   { ar: 'أخرى',                    en: 'Other' },
-  // Talent categories
-  'Product / Commercial':    { ar: 'منتجات / إعلانات',        en: 'Product / Commercial' },
-  'Fashion':                 { ar: 'أزياء',                   en: 'Fashion' },
-  'Fitness':                 { ar: 'لياقة',                   en: 'Fitness' },
-  'Podcast Host':            { ar: 'مقدّم بودكاست',           en: 'Podcast Host' },
-  'Voiceover':               { ar: 'تعليق صوتي',              en: 'Voiceover' },
-  'Presenter':               { ar: 'مقدّم برامج',             en: 'Presenter' },
-};
-
 export const GEAR_CATEGORIES = ['Cameras','Lenses','Lighting','Audio','Grip & Rigging','Drones','Monitors & Video','Computers & Storage','Studio & Decor','Cables & Connectors','Adapters','Mounting & Rigging Tools','Cleaning & Maintenance','Storage & Transport','On-Location & Shade','Forgotten Essentials','Other'];
 export const TALENT_CATEGORIES = ['Product / Commercial','Fashion','Fitness','Podcast Host','Voiceover','Presenter','Other'];
 
@@ -350,7 +307,6 @@ export function setStatus(el, msg, kind) {
  */
 export async function uploadImage(bucket, file) {
   if (!file) return null;
-  const sb = await getSb();
   const path = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`.replace(/\s+/g, '-');
   const { error } = await sb.storage.from(bucket).upload(path, file, {
     cacheControl: '3600',
@@ -372,7 +328,6 @@ export function formatMoney(n) {
  * Returns { byTalent: Map<talent_id, {top, list}> }
  */
 export async function loadPublicBids() {
-  const sb = await getSb();
   const { data, error } = await sb
     .from('talent_bids_public')
     .select('talent_id,client_name,bid_amount,created_at')
@@ -392,7 +347,6 @@ export async function loadPublicBids() {
  * Returns Map<influencer_id, Array<{submitter_name, platform, video_url, created_at}>>
  */
 export async function loadPublicSubmissions() {
-  const sb = await getSb();
   const { data, error } = await sb
     .from('campaign_submissions_public')
     .select('influencer_id,submitter_name,platform,video_url,created_at')
