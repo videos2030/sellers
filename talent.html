@@ -174,7 +174,16 @@
 </div>
 
 <script type="module">
-import { sb, escapeHtml, setStatus, uploadImage, initI18n, onLangChange, t, catLabel, formatMoney, TALENT_CATEGORIES, loadPublicBids } from './app.js';
+import { getSb, escapeHtml, setStatus, uploadImage, initI18n, onLangChange, t, catLabel, formatMoney, TALENT_CATEGORIES, loadPublicBids } from './app.js';
+
+initI18n();
+
+let sb = null;
+try {
+  sb = await getSb();
+} catch (err) {
+  console.error(err);
+}
 
 const tCategorySelect = document.getElementById('tCategory');
 function buildCategoryUI() {
@@ -235,10 +244,11 @@ function renderTalent() {
 }
 
 async function loadTalent() {
+  const grid = document.getElementById('talentGrid');
+  if (!sb) { grid.innerHTML = `<div class="empty">${t('talent.error')}</div>`; return; }
   const { data, error } = await sb.from('talent_profiles')
     .select('id,name,category,bio,rate_reference,image_url,created_at')
     .order('created_at', { ascending: false });
-  const grid = document.getElementById('talentGrid');
   if (error) {
     grid.innerHTML = `<div class="empty">${t('talent.error')}</div>`;
     console.error(error);
@@ -256,6 +266,7 @@ talentForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const statusEl = document.getElementById('talentStatus');
   const submitBtn = talentForm.querySelector('button[type=submit]');
+  if (!sb) { setStatus(statusEl, t('talent.submitErr'), 'err'); return; }
   submitBtn.disabled = true;
   setStatus(statusEl, t('status.uploading'));
   try {
@@ -297,6 +308,7 @@ bidForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const statusEl = document.getElementById('bidStatus');
   const submitBtn = bidForm.querySelector('button[type=submit]');
+  if (!sb) { setStatus(statusEl, t('talent.bidErr'), 'err'); return; }
   submitBtn.disabled = true;
   setStatus(statusEl, t('status.sending'));
   try {
@@ -322,7 +334,6 @@ bidForm.addEventListener('submit', async (e) => {
   }
 });
 
-initI18n();
 onLangChange(() => { buildCategoryUI(); renderTalent(); });
 </script>
 

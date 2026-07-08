@@ -1,21 +1,37 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// ---- Supabase client ----
+// The URL/anon key are NOT hardcoded here. They're fetched once from
+// /api/config, a tiny Vercel serverless function that reads them from this
+// project's Environment Variables (see api/config.js). getSb() caches the
+// resulting client so the fetch only happens once per page load.
+let clientPromise = null;
+async function initClient() {
+  const res = await fetch('/api/config');
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({}));
+    throw new Error(body.error || `Could not load Supabase config (HTTP ${res.status}). If you're running this locally, use \`vercel dev\` instead of opening the file directly.`);
+  }
+  const { supabaseUrl, supabaseAnonKey } = await res.json();
+  return createClient(supabaseUrl, supabaseAnonKey);
+}
+export function getSb() {
+  if (!clientPromise) clientPromise = initClient();
+  return clientPromise;
+}
 
-export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 // ==========================================================
 // i18n — Arabic default, English toggle
 // ==========================================================
 
 export const DICT = {
   'nav.gear':        { ar: 'المعدات', en: 'Gear' },
-  'nav.talent':       { ar: 'الموديلز', en: 'Models' },
-  'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencer Campaigns' },
+  'nav.talent':       { ar: 'الموديلات', en: 'Talent' },
+  'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencers' },
   'nav.langBtn':      { ar: 'English', en: 'العربية' },
 
   // ---- Home ----
-  'home.tag':         { ar: ' أجّر المعدات بدل في جالسة شنطتك، وحقق دخل سلبي ، واحجز الموديل التي تحتاجها حملتك — كل شيء في مكان واحد وبدون أي تسجيل حساب.', en: 'Rent out the gear sitting in your case. Book the talent your campaign needs. One place, no account required.' },
+  'home.tag':         { ar: 'أجّر المعدات النائمة في شنطتك، واحجز الموديل التي تحتاجها حملتك — كل شيء في مكان واحد وبدون أي تسجيل حساب.', en: 'Rent out the gear sitting in your case. Book the talent your campaign needs. One place, no account required.' },
   'home.plate1':      { ar: 'المعدات · كاميرات، إضاءة، صوت، كابلات ومهمات ميدانية', en: 'GEAR · cameras, lighting, audio, cables & field kit' },
   'home.plate2':      { ar: 'الموديلات · مزايدة وحجز مباشر أمام الكاميرا', en: 'TALENT · on-camera bidding & booking' },
   'home.plate3':      { ar: 'بدون تسجيل دخول · مجرد فورم', en: 'NO SIGN-IN · just a form' },
@@ -45,7 +61,7 @@ export const DICT = {
   'home.step3H':      { ar: 'أكّدوا مباشرة', en: 'Confirm off-platform' },
   'home.step3P':      { ar: 'التأكيد النهائي للمواعيد والأسعار والدفعة المقدّمة يتم بالاتصال المباشر.', en: 'Owners follow up by phone or email to confirm dates, rates, and any deposit before work begins.' },
   'footer.tag':       { ar: 'ONSET — سوق تأجير معدات الإنتاج وحجز الموديلات', en: 'ONSET — production gear & talent marketplace' },
-  'footer.built':     { ar: ' ·', en: ' ' },
+  'footer.built':     { ar: 'مبني على Supabase · منشور على Vercel', en: 'Built on Supabase · Deployed on Vercel' },
 
   // ---- Rental page ----
   'rental.eyebrow':   { ar: 'سوق المعدات', en: 'Equipment marketplace' },
@@ -305,6 +321,7 @@ export function setStatus(el, msg, kind) {
  */
 export async function uploadImage(bucket, file) {
   if (!file) return null;
+  const sb = await getSb();
   const path = `${Date.now()}-${Math.random().toString(36).slice(2)}-${file.name}`.replace(/\s+/g, '-');
   const { error } = await sb.storage.from(bucket).upload(path, file, {
     cacheControl: '3600',
@@ -326,6 +343,7 @@ export function formatMoney(n) {
  * Returns { byTalent: Map<talent_id, {top, list}> }
  */
 export async function loadPublicBids() {
+  const sb = await getSb();
   const { data, error } = await sb
     .from('talent_bids_public')
     .select('talent_id,client_name,bid_amount,created_at')
@@ -345,6 +363,7 @@ export async function loadPublicBids() {
  * Returns Map<influencer_id, Array<{submitter_name, platform, video_url, created_at}>>
  */
 export async function loadPublicSubmissions() {
+  const sb = await getSb();
   const { data, error } = await sb
     .from('campaign_submissions_public')
     .select('influencer_id,submitter_name,platform,video_url,created_at')
