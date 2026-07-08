@@ -12,7 +12,7 @@ export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export const DICT = {
   'nav.gear':        { ar: 'المعدات', en: 'Gear' },
-  'nav.talent':       { ar: 'الموديلز', en: 'Talent' },
+  'nav.talent':       { ar: 'الموديلز', en: 'Models' },
   'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencers' },
   'nav.langBtn':      { ar: 'English', en: 'العربية' },
 
