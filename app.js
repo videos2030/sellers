@@ -26,12 +26,12 @@ export function getSb() {
 
 export const DICT = {
   'nav.gear':        { ar: 'المعدات', en: 'Gear' },
-  'nav.talent':       { ar: 'الموديلات', en: 'Talent' },
-  'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencers' },
+  'nav.talent':       { ar: 'الموديلز', en: 'Models' },
+  'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencer Campaigns' },
   'nav.langBtn':      { ar: 'English', en: 'العربية' },
 
   // ---- Home ----
-  'home.tag':         { ar: 'أجّر المعدات النائمة في شنطتك، واحجز الموديل التي تحتاجها حملتك — كل شيء في مكان واحد وبدون أي تسجيل حساب.', en: 'Rent out the gear sitting in your case. Book the talent your campaign needs. One place, no account required.' },
+  'home.tag':         { ar: ' أجّر المعدات بدل في جالسة شنطتك، وحقق دخل سلبي ، واحجز الموديل التي تحتاجها حملتك — كل شيء في مكان واحد وبدون أي تسجيل حساب.', en: 'Rent out the gear sitting in your case. Book the talent your campaign needs. One place, no account required.' },
   'home.plate1':      { ar: 'المعدات · كاميرات، إضاءة، صوت، كابلات ومهمات ميدانية', en: 'GEAR · cameras, lighting, audio, cables & field kit' },
   'home.plate2':      { ar: 'الموديلات · مزايدة وحجز مباشر أمام الكاميرا', en: 'TALENT · on-camera bidding & booking' },
   'home.plate3':      { ar: 'بدون تسجيل دخول · مجرد فورم', en: 'NO SIGN-IN · just a form' },
@@ -61,7 +61,7 @@ export const DICT = {
   'home.step3H':      { ar: 'أكّدوا مباشرة', en: 'Confirm off-platform' },
   'home.step3P':      { ar: 'التأكيد النهائي للمواعيد والأسعار والدفعة المقدّمة يتم بالاتصال المباشر.', en: 'Owners follow up by phone or email to confirm dates, rates, and any deposit before work begins.' },
   'footer.tag':       { ar: 'ONSET — سوق تأجير معدات الإنتاج وحجز الموديلات', en: 'ONSET — production gear & talent marketplace' },
-  'footer.built':     { ar: 'مبني على Supabase · منشور على Vercel', en: 'Built on Supabase · Deployed on Vercel' },
+  'footer.built':     { ar: ' ·', en: ' ' },
 
   // ---- Rental page ----
   'rental.eyebrow':   { ar: 'سوق المعدات', en: 'Equipment marketplace' },
@@ -191,6 +191,35 @@ export const DICT = {
   'camp.subOk':        { ar: 'تم إرسال فيديوك، ويظهر الآن ضمن قائمة العام.', en: 'Video submitted. It now appears in the public list.' },
   'camp.subErr':       { ar: 'تعذّر إرسال الفيديو. حاول مرة أخرى.', en: 'Could not submit your video. Please try again.' },
 };
+
+const CATEGORY_LABELS = {
+  // Gear categories
+  'Cameras':                 { ar: 'كاميرات',                 en: 'Cameras' },
+  'Lenses':                  { ar: 'عدسات',                   en: 'Lenses' },
+  'Lighting':                { ar: 'إضاءة',                   en: 'Lighting' },
+  'Audio':                   { ar: 'صوتيات',                  en: 'Audio' },
+  'Grip & Rigging':          { ar: 'جريب وتثبيت',             en: 'Grip & Rigging' },
+  'Drones':                  { ar: 'درونز',                   en: 'Drones' },
+  'Monitors & Video':        { ar: 'شاشات وفيديو',            en: 'Monitors & Video' },
+  'Computers & Storage':     { ar: 'أجهزة وتخزين',            en: 'Computers & Storage' },
+  'Studio & Decor':          { ar: 'استوديو وديكور',          en: 'Studio & Decor' },
+  'Cables & Connectors':     { ar: 'كابلات وتوصيلات',         en: 'Cables & Connectors' },
+  'Adapters':                { ar: 'محوّلات',                 en: 'Adapters' },
+  'Mounting & Rigging Tools':{ ar: 'أدوات تثبيت وتنظيم',      en: 'Mounting & Rigging Tools' },
+  'Cleaning & Maintenance':  { ar: 'تنظيف وصيانة',            en: 'Cleaning & Maintenance' },
+  'Storage & Transport':     { ar: 'تخزين ونقل',              en: 'Storage & Transport' },
+  'On-Location & Shade':     { ar: 'خيمة إنتاج وتظليل ميداني', en: 'On-Location & Shade' },
+  'Forgotten Essentials':    { ar: 'أساسيات لا تُنسى',        en: 'Forgotten Essentials' },
+  'Other':                   { ar: 'أخرى',                    en: 'Other' },
+  // Talent categories
+  'Product / Commercial':    { ar: 'منتجات / إعلانات',        en: 'Product / Commercial' },
+  'Fashion':                 { ar: 'أزياء',                   en: 'Fashion' },
+  'Fitness':                 { ar: 'لياقة',                   en: 'Fitness' },
+  'Podcast Host':            { ar: 'مقدّم بودكاست',           en: 'Podcast Host' },
+  'Voiceover':               { ar: 'تعليق صوتي',              en: 'Voiceover' },
+  'Presenter':               { ar: 'مقدّم برامج',             en: 'Presenter' },
+};
+
 
 const CATEGORY_LABELS = {
   // Gear categories
