@@ -1,8 +1,7 @@
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-// ---- Supabase project config ----
-const SUPABASE_URL = 'https://vssedyrcnfjrzmibknhg.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZzc2VkeXJjbmZqcnptaWJrbmhnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODMzOTk1NjMsImV4cCI6MjA5ODk3NTU2M30.TTQ8-AaYGxGgAScH7US84N6d57jGj16dsIvMTMwming';
+const SUPABASE_URL = window.ENV.SUPABASE_URL;
+const SUPABASE_ANON_KEY = window.ENV.SUPABASE_ANON_KEY;
 
 export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -47,7 +46,7 @@ export const DICT = {
   'home.step3H':      { ar: 'أكّدوا مباشرة', en: 'Confirm off-platform' },
   'home.step3P':      { ar: 'التأكيد النهائي للمواعيد والأسعار والدفعة المقدّمة يتم بالاتصال المباشر.', en: 'Owners follow up by phone or email to confirm dates, rates, and any deposit before work begins.' },
   'footer.tag':       { ar: 'ONSET — سوق تأجير معدات الإنتاج وحجز الموديلات', en: 'ONSET — production gear & talent marketplace' },
-  'footer.built':     { ar: 'مبني على Supabase · منشور على Vercel', en: 'Built on Supabase · Deployed on Vercel' },
+  'footer.built':     { ar: ' ·', en: ' ' },
 
   // ---- Rental page ----
   'rental.eyebrow':   { ar: 'سوق المعدات', en: 'Equipment marketplace' },
