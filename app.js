@@ -12,12 +12,12 @@ export const sb = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export const DICT = {
   'nav.gear':        { ar: 'المعدات', en: 'Gear' },
-  'nav.talent':       { ar: 'الموديلات', en: 'Talent' },
+  'nav.talent':       { ar: 'الموديلز', en: 'Talent' },
   'nav.campaigns':    { ar: 'حملات المشاهير', en: 'Influencers' },
   'nav.langBtn':      { ar: 'English', en: 'العربية' },
 
   // ---- Home ----
-  'home.tag':         { ar: 'أجّر المعدات النائمة في شنطتك، واحجز الموديل التي تحتاجها حملتك — كل شيء في مكان واحد وبدون أي تسجيل حساب.', en: 'Rent out the gear sitting in your case. Book the talent your campaign needs. One place, no account required.' },
+  'home.tag':         { ar: ' أجّر المعدات بدل في جالسة شنطتك، وحقق دخل سلبي ، واحجز الموديل التي تحتاجها حملتك — كل شيء في مكان واحد وبدون أي تسجيل حساب.', en: 'Rent out the gear sitting in your case. Book the talent your campaign needs. One place, no account required.' },
   'home.plate1':      { ar: 'المعدات · كاميرات، إضاءة، صوت، كابلات ومهمات ميدانية', en: 'GEAR · cameras, lighting, audio, cables & field kit' },
   'home.plate2':      { ar: 'الموديلات · مزايدة وحجز مباشر أمام الكاميرا', en: 'TALENT · on-camera bidding & booking' },
   'home.plate3':      { ar: 'بدون تسجيل دخول · مجرد فورم', en: 'NO SIGN-IN · just a form' },
